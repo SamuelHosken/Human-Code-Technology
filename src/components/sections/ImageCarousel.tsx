@@ -11,7 +11,7 @@ export function ImageCarousel() {
 
   const imageHeight = isMobile ? 80 : 150;
   const imageWidth = isMobile ? 120 : 200;
-  const gap = isMobile ? 24 : 40;
+  const gap = isMobile ? 12 : 20;
   const padding = isMobile ? 32 : 60;
 
   return (
@@ -90,7 +90,7 @@ export function ImageCarousel() {
       <motion.div
         animate={{ x: "-50%" }}
         transition={{
-          duration: isMobile ? 20 : 30,
+          duration: isMobile ? 45 : 65,
           repeat: Infinity,
           repeatType: "loop",
           ease: "linear",

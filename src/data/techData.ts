@@ -96,6 +96,54 @@ export const techData: GridCellData[] = [
   { code: "ANL-06", label: "BigQuery" },
   { code: "ANL-07", label: "Datadog" },
   { code: "ANL-08", label: "Grafana" },
+  // Security & Auth
+  { code: "SEC-01", label: "Clerk" },
+  { code: "SEC-02", label: "Auth0" },
+  { code: "SEC-03", label: "Vault" },
+  { code: "SEC-04", label: "Cloudflare" },
+  // DevOps & CI/CD
+  { code: "DEV-01", label: "Terraform" },
+  { code: "DEV-02", label: "GitHub Actions" },
+  { code: "DEV-03", label: "ArgoCD" },
+  { code: "DEV-04", label: "Ansible" },
+  // Data & ETL
+  { code: "DTA-01", label: "Apache Kafka" },
+  { code: "DTA-02", label: "Airflow" },
+  { code: "DTA-03", label: "dbt" },
+  { code: "DTA-04", label: "Spark" },
+  // Communication
+  { code: "COM-01", label: "SendGrid" },
+  { code: "COM-02", label: "Resend" },
+  { code: "COM-03", label: "WhatsApp API" },
+  { code: "COM-04", label: "Intercom" },
+  // Testing & QA
+  { code: "QA-01", label: "Cypress" },
+  { code: "QA-02", label: "Jest" },
+  { code: "QA-03", label: "Vitest" },
+  { code: "QA-04", label: "Puppeteer" },
+  // AI & Automation Extended
+  { code: "AI-11", label: "Claude Sonnet" },
+  { code: "AI-12", label: "Whisper" },
+  { code: "AI-13", label: "DALL-E 3" },
+  { code: "AI-14", label: "Stable Diffusion" },
+  { code: "AI-15", label: "Midjourney API" },
+  { code: "ML-09", label: "CrewAI" },
+  { code: "ML-10", label: "AutoGen" },
+  { code: "ML-11", label: "Hugging Face" },
+  { code: "ML-12", label: "OpenRouter" },
+  { code: "ML-13", label: "Replicate" },
+  // Programming & Infra Extended
+  { code: "LNG-09", label: "Java" },
+  { code: "LNG-10", label: "C#" },
+  { code: "FRM-09", label: "Spring Boot" },
+  { code: "FRM-10", label: "Flask" },
+  { code: "CLD-09", label: "Railway" },
+  { code: "CLD-10", label: "Render" },
+  // Automation Extended
+  { code: "AUT-09", label: "Retool" },
+  { code: "AUT-10", label: "Appsmith" },
+  { code: "AUT-11", label: "Temporal" },
+  { code: "AUT-12", label: "RPA UiPath" },
 ];
 
 export const heroGridData: GridCellData[] = [

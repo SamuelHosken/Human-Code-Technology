@@ -6,7 +6,7 @@ import Image from "next/image";
 
 // Imported components
 import { Header, ScrollProgressLine } from "@/components/layout";
-import { LiquidGlassFilter, BlinkReveal, LineReveal, FlipText, TriggeredRevealText } from "@/components/ui";
+import { LiquidGlassFilter, BlinkReveal, LineReveal, FlipText, TriggeredRevealText, MagicCard, BorderBeam, ShineBorder } from "@/components/ui";
 import { ImageCarousel } from "@/components/sections";
 import { ACCENT_BLUE, containerStyle, heroContainerStyle, servicesData, techData, heroGridData, GridCellData } from "@/data";
 import { useIsMobile } from "@/hooks";
@@ -43,6 +43,99 @@ function HeroTitleReveal({ delay = 0 }: { delay?: number }) {
 }
 
 
+
+// Metric Card with counting animation on hover
+function MetricCard({ metric, index, isMobile }: {
+  metric: { value: string; num: number; suffix: string; label: string };
+  index: number;
+  isMobile: boolean;
+}) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [displayNum, setDisplayNum] = useState(metric.num);
+  const animRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (isHovered) {
+      // Reset to 0 and count up
+      setDisplayNum(0);
+      const target = metric.num;
+      const duration = 800;
+      const startTime = performance.now();
+
+      const animate = (now: number) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        setDisplayNum(Math.round(eased * target));
+        if (progress < 1) {
+          animRef.current = requestAnimationFrame(animate);
+        }
+      };
+      animRef.current = requestAnimationFrame(animate);
+    } else {
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+      setDisplayNum(metric.num);
+    }
+    return () => {
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+    };
+  }, [isHovered, metric.num]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <MagicCard
+        gradientSize={250}
+        gradientColor="#f0f0f0"
+        gradientOpacity={0.6}
+        gradientFrom="#0066FF"
+        gradientTo="#0044AA"
+        style={{ backgroundColor: "#fff" }}
+      >
+        <div style={{
+          padding: isMobile ? "24px 16px" : "40px 24px",
+          textAlign: "center",
+        }}>
+          <motion.span
+            animate={{
+              scale: isHovered ? 1.1 : 1,
+              color: isHovered ? "#0066FF" : "#000",
+            }}
+            transition={{ duration: 0.3 }}
+            style={{
+              display: "block",
+              fontSize: isMobile ? "28px" : "clamp(32px, 5vw, 48px)",
+              fontWeight: 500,
+              color: "#000",
+              marginBottom: "12px",
+              fontFamily: "monospace",
+            }}
+          >
+            {displayNum}{metric.suffix}
+          </motion.span>
+          <span
+            style={{
+              fontSize: "12px",
+              color: "#666",
+              fontWeight: 400,
+              textTransform: "uppercase",
+              letterSpacing: "1px",
+            }}
+          >
+            {metric.label}
+          </span>
+        </div>
+      </MagicCard>
+    </motion.div>
+  );
+}
 
 // Article Card with hover effect
 function ArticleCard({
@@ -1547,18 +1640,18 @@ function TechGridCell({
 function TechGrid() {
   const isMobile = useIsMobile();
   const columns = isMobile ? 3 : 8;
-  const rows = isMobile ? 8 : 14;
-  const gridCells = columns * rows; // 24 cells on mobile, 112 on desktop
+  const rows = isMobile ? 8 : 19;
+  const gridCells = columns * rows;
   const gridRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
 
   // Initialize with deterministic values to avoid hydration mismatch
   const [cellIndices, setCellIndices] = useState(() =>
-    Array.from({ length: 112 }, (_, i) => i % techData.length)
+    Array.from({ length: 152 }, (_, i) => i % techData.length)
   );
 
   const [revealDelays, setRevealDelays] = useState(() =>
-    Array.from({ length: 112 }, (_, i) => i * 10)
+    Array.from({ length: 152 }, (_, i) => i * 10)
   );
 
   // Randomize on client only after hydration
@@ -2507,17 +2600,29 @@ function ScrollPinnedAbout() {
                   marginBottom: "24px",
                 }}
               >
-                <TriggeredRevealText active={phase >= 2} delay={0}>
+                <motion.span
+                  animate={{ opacity: phase >= 2 ? 1 : 0, y: phase >= 2 ? 0 : 20, filter: phase >= 2 ? "blur(0px)" : "blur(6px)" }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                  style={{ display: "inline-block" }}
+                >
                   O que é a&nbsp;
-                </TriggeredRevealText>
-                <TriggeredRevealText active={phase >= 2} delay={80}>
+                </motion.span>
+                <motion.span
+                  animate={{ opacity: phase >= 2 ? 1 : 0, y: phase >= 2 ? 0 : 20, filter: phase >= 2 ? "blur(0px)" : "blur(6px)" }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+                  style={{ display: "inline-block" }}
+                >
                   <span style={{ fontWeight: 600, color: "#fff" }}>
                     Human Code
                   </span>
-                </TriggeredRevealText>
-                <TriggeredRevealText active={phase >= 2} delay={160}>
+                </motion.span>
+                <motion.span
+                  animate={{ opacity: phase >= 2 ? 1 : 0, y: phase >= 2 ? 0 : 20, filter: phase >= 2 ? "blur(0px)" : "blur(6px)" }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                  style={{ display: "inline-block" }}
+                >
                   &nbsp;?
-                </TriggeredRevealText>
+                </motion.span>
               </h2>
 
               {/* Description */}
@@ -2966,47 +3071,12 @@ export default function Home() {
             }}
           >
             {[
-              { value: "150+", label: "Processos automatizados" },
-              { value: "40%", label: "Redução média de custos operacionais" },
-              { value: "98%", label: "Taxa de satisfação dos clientes" },
-              { value: "24/7", label: "Monitoramento e suporte técnico" },
+              { value: "150+", num: 150, suffix: "+", label: "Processos automatizados" },
+              { value: "40%", num: 40, suffix: "%", label: "Redução média de custos operacionais" },
+              { value: "98%", num: 98, suffix: "%", label: "Taxa de satisfação dos clientes" },
+              { value: "24/7", num: 24, suffix: "/7", label: "Monitoramento e suporte técnico" },
             ].map((metric, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                style={{
-                  backgroundColor: "#fff",
-                  padding: isMobile ? "24px 16px" : "40px 24px",
-                  textAlign: "center",
-                }}
-              >
-                <span
-                  style={{
-                    display: "block",
-                    fontSize: isMobile ? "28px" : "clamp(32px, 5vw, 48px)",
-                    fontWeight: 500,
-                    color: "#000",
-                    marginBottom: "12px",
-                    fontFamily: "monospace",
-                  }}
-                >
-                  {metric.value}
-                </span>
-                <span
-                  style={{
-                    fontSize: "12px",
-                    color: "#666",
-                    fontWeight: 400,
-                    textTransform: "uppercase",
-                    letterSpacing: "1px",
-                  }}
-                >
-                  {metric.label}
-                </span>
-              </motion.div>
+              <MetricCard key={index} metric={metric} index={index} isMobile={isMobile} />
             ))}
           </motion.div>
         </div>
@@ -3191,11 +3261,19 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
               style={{
+                position: "relative",
                 border: "1px solid #1a1a1a",
                 backgroundColor: "#000",
                 padding: isMobile ? "16px" : "24px",
               }}
             >
+              <BorderBeam
+                size={15}
+                duration={8}
+                colorFrom="#0066FF"
+                colorTo="#003399"
+                borderRadius="0px"
+              />
               <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "20px" }}>
                 <motion.div
                   animate={{ opacity: [0.3, 1, 0.3] }}
@@ -3293,14 +3371,21 @@ export default function Home() {
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  style={{
-                    backgroundColor: "#000",
-                    padding: "32px 24px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "16px",
-                  }}
                 >
+                  <MagicCard
+                    gradientSize={200}
+                    gradientColor="#111"
+                    gradientOpacity={0.7}
+                    gradientFrom="#0066FF"
+                    gradientTo="#003399"
+                    style={{ backgroundColor: "#000" }}
+                  >
+                    <div style={{
+                      padding: "32px 24px",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "16px",
+                    }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                     <span
                       style={{
@@ -3333,6 +3418,8 @@ export default function Home() {
                   >
                     {step.description}
                   </p>
+                    </div>
+                  </MagicCard>
                 </motion.div>
               ))}
             </motion.div>
@@ -3587,7 +3674,7 @@ export default function Home() {
       )}
 
       {/* Artigos Preview */}
-      <section id="artigos" style={{ padding: isMobile ? "16px 0 60px" : "16px 0 120px", backgroundColor: "#000" }}>
+      <section id="artigos" style={{ padding: isMobile ? "60px 0" : "80px 0 120px", backgroundColor: "#000" }}>
         <div style={responsiveContainer}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -3701,10 +3788,16 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
               style={{
+                position: "relative",
                 border: "1px solid #e0e0e0",
                 borderBottom: "none",
               }}
             >
+              <ShineBorder
+                borderWidth={1}
+                duration={10}
+                shineColor={["#0066FF", "#0044AA", "#0066FF"]}
+              />
               <motion.a
                 href="mailto:contato@humancode.com"
                 whileHover={{ backgroundColor: "#f5f5f5" }}
@@ -3786,9 +3879,14 @@ export default function Home() {
                   <motion.a
                     key={link.href}
                     href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const id = link.href.replace("#", "");
+                      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+                    }}
                     whileHover={{ color: "#000" }}
                     transition={{ duration: 0.2 }}
-                    style={{ fontFamily: "monospace", fontSize: "10px", color: "#888", textDecoration: "none", letterSpacing: "1px" }}
+                    style={{ fontFamily: "monospace", fontSize: "10px", color: "#888", textDecoration: "none", letterSpacing: "1px", cursor: "pointer" }}
                   >
                     {link.label}
                   </motion.a>

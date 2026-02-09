@@ -146,7 +146,12 @@ function MobileMenu({
               <motion.a
                 key={link.href}
                 href={link.href}
-                onClick={onClose}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onClose();
+                  const id = link.href.replace("#", "");
+                  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+                }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -168,6 +173,7 @@ function MobileMenu({
                   textAlign: "center",
                   border: "1px solid transparent",
                   transition: "border-color 0.2s, color 0.2s",
+                  cursor: "pointer",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
@@ -416,6 +422,11 @@ export function Header() {
                 <motion.a
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const id = link.href.replace("#", "");
+                    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+                  }}
                   animate={{
                     opacity: showLinks ? 1 : 0,
                   }}
@@ -432,6 +443,7 @@ export function Header() {
                     color: "rgba(255, 255, 255, 0.7)",
                     textDecoration: "none",
                     letterSpacing: "0.5px",
+                    cursor: "pointer",
                   }}
                 >
                   {link.label}
