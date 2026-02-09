@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // Text reveal animation component
 export function RevealText({
@@ -188,36 +188,49 @@ export function TriggeredRevealText({
   active: boolean;
   delay?: number;
 }) {
-  const [phase, setPhase] = useState(0);
-  const [lastActive, setLastActive] = useState(active);
+  const [triggered, setTriggered] = useState(false);
+  const lastActiveRef = useRef(active);
 
   useEffect(() => {
-    if (active !== lastActive) {
-      setPhase(0);
-      setLastActive(active);
-
-      if (active) {
-        const timer1 = setTimeout(() => setPhase(1), delay);
-        const timer2 = setTimeout(() => setPhase(2), delay + 80);
-        const timer3 = setTimeout(() => setPhase(3), delay + 160);
-        return () => {
-          clearTimeout(timer1);
-          clearTimeout(timer2);
-          clearTimeout(timer3);
-        };
-      }
+    if (active && !lastActiveRef.current) {
+      const timer = setTimeout(() => setTriggered(true), delay);
+      lastActiveRef.current = true;
+      return () => clearTimeout(timer);
     }
-  }, [active, lastActive, delay]);
+    if (!active && lastActiveRef.current) {
+      setTriggered(false);
+      lastActiveRef.current = false;
+    }
+  }, [active, delay]);
 
   return (
-    <motion.span
-      animate={{
-        opacity: phase === 0 ? 0.3 : phase === 1 ? 1 : phase === 2 ? 0.5 : 1,
-      }}
-      transition={{ duration: 0.06 }}
-      style={{ display: "inline-block" }}
-    >
-      {children}
-    </motion.span>
+    <span style={{ position: "relative", display: "inline-block", overflow: "hidden" }}>
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ opacity: triggered ? 1 : 0 }}
+        transition={{ duration: 0.01, delay: triggered ? 0.2 : 0 }}
+        style={{ display: "inline-block" }}
+      >
+        {children}
+      </motion.span>
+      <motion.span
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: triggered ? [0, 1, 1, 0] : 0 }}
+        transition={{
+          duration: 0.5,
+          times: [0, 0.4, 0.4, 1],
+          ease: [0.4, 0, 0.2, 1],
+        }}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "#fff",
+          transformOrigin: "left",
+        }}
+      />
+    </span>
   );
 }

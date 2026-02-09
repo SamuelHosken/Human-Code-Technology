@@ -1028,6 +1028,319 @@ function HeroGrid() {
   );
 }
 
+// Mobile Hero Section - Redesigned for impact
+function MobileHeroSection() {
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    // Staggered reveal phases
+    const timers = [
+      setTimeout(() => setPhase(1), 200),   // Status indicator
+      setTimeout(() => setPhase(2), 500),   // Title line 1
+      setTimeout(() => setPhase(3), 700),   // Title line 2
+      setTimeout(() => setPhase(4), 900),   // Title line 3
+      setTimeout(() => setPhase(5), 1100),  // Description
+      setTimeout(() => setPhase(6), 1400),  // CTA
+      setTimeout(() => setPhase(7), 1700),  // Decorative elements
+    ];
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  return (
+    <section
+      id="home"
+      style={{
+        position: "relative",
+        minHeight: "100svh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: "80px 20px 40px",
+        overflow: "hidden",
+        backgroundColor: "#000",
+      }}
+    >
+      {/* Background decorative grid lines */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.03,
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 60px",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Floating code snippets - decorative */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: phase >= 7 ? 0.08 : 0 }}
+        transition={{ duration: 1 }}
+        style={{
+          position: "absolute",
+          top: "15%",
+          right: "5%",
+          fontFamily: "monospace",
+          fontSize: "8px",
+          color: "#fff",
+          transform: "rotate(12deg)",
+        }}
+      >
+        {"<init/>"}
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: phase >= 7 ? 0.06 : 0 }}
+        transition={{ duration: 1, delay: 0.2 }}
+        style={{
+          position: "absolute",
+          bottom: "25%",
+          left: "8%",
+          fontFamily: "monospace",
+          fontSize: "8px",
+          color: ACCENT_BLUE,
+          transform: "rotate(-8deg)",
+        }}
+      >
+        {"0x7F"}
+      </motion.div>
+
+      {/* Main content */}
+      <div style={{ position: "relative", zIndex: 1 }}>
+        {/* Status indicator - larger and centered */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{
+            opacity: phase >= 1 ? 1 : 0,
+            scale: phase >= 1 ? 1 : 0.8
+          }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "12px",
+            marginBottom: "40px",
+          }}
+        >
+          <motion.div
+            animate={{
+              opacity: phase >= 1 ? [0.4, 1, 0.4] : 0,
+              boxShadow: phase >= 1 ? [
+                `0 0 10px ${ACCENT_BLUE}`,
+                `0 0 25px ${ACCENT_BLUE}`,
+                `0 0 10px ${ACCENT_BLUE}`
+              ] : "none"
+            }}
+            transition={{ duration: 2, repeat: Infinity }}
+            style={{
+              width: "10px",
+              height: "10px",
+              backgroundColor: ACCENT_BLUE,
+              borderRadius: "50%",
+            }}
+          />
+          <span
+            style={{
+              fontFamily: "monospace",
+              fontSize: "11px",
+              color: "#666",
+              letterSpacing: "3px",
+              textTransform: "uppercase",
+            }}
+          >
+            SYSTEM ONLINE
+          </span>
+          <motion.div
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{ duration: 1, repeat: Infinity }}
+            style={{
+              fontFamily: "monospace",
+              fontSize: "11px",
+              color: "#fff",
+            }}
+          >
+            _
+          </motion.div>
+        </motion.div>
+
+        {/* Title - dramatic reveal */}
+        <div style={{ marginBottom: "32px" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: phase >= 2 ? 1 : 0, y: phase >= 2 ? 0 : 20 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              fontSize: "32px",
+              fontWeight: 300,
+              lineHeight: 1.2,
+              marginBottom: "8px",
+            }}
+          >
+            <span style={{ fontWeight: 500 }}>Soluções</span> tecnológicas
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: phase >= 3 ? 1 : 0, y: phase >= 3 ? 0 : 20 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              fontSize: "32px",
+              fontWeight: 300,
+              lineHeight: 1.2,
+              marginBottom: "8px",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-fraunces), Georgia, serif",
+                fontStyle: "italic",
+                color: "#fff",
+              }}
+            >
+              sob medida
+            </span>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: phase >= 4 ? 1 : 0, y: phase >= 4 ? 0 : 20 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              fontSize: "32px",
+              fontWeight: 500,
+              lineHeight: 1.2,
+            }}
+          >
+            para quem precisa de{" "}
+            <span style={{ color: ACCENT_BLUE }}>eficiência real</span>
+          </motion.div>
+        </div>
+
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: phase >= 5 ? 1 : 0, y: phase >= 5 ? 0 : 15 }}
+          transition={{ duration: 0.6 }}
+          style={{
+            fontSize: "15px",
+            lineHeight: 1.8,
+            color: "#888",
+            marginBottom: "40px",
+            maxWidth: "320px",
+          }}
+        >
+          Automação completa, pensada do zero para os processos que movem o{" "}
+          <span style={{ color: "#ccc", fontWeight: 400 }}>seu negócio</span>.
+        </motion.p>
+
+        {/* CTA Button */}
+        <motion.a
+          href="#servicos"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: phase >= 6 ? 1 : 0, y: phase >= 6 ? 0 : 20 }}
+          transition={{ duration: 0.5 }}
+          whileTap={{ scale: 0.98 }}
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "12px",
+            padding: "16px 28px",
+            backgroundColor: "#fff",
+            color: "#000",
+            fontFamily: "monospace",
+            fontSize: "12px",
+            fontWeight: 500,
+            textDecoration: "none",
+            letterSpacing: "1px",
+            textTransform: "uppercase",
+          }}
+        >
+          <span>Ver serviços</span>
+          <motion.span
+            animate={{ x: [0, 4, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            →
+          </motion.span>
+        </motion.a>
+
+        {/* Terminal-style info box */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: phase >= 7 ? 1 : 0 }}
+          transition={{ duration: 0.8 }}
+          style={{
+            marginTop: "48px",
+            padding: "16px",
+            border: "1px solid #1a1a1a",
+            backgroundColor: "rgba(0,0,0,0.5)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+            <div style={{ width: "6px", height: "6px", backgroundColor: "#333" }} />
+            <span style={{ fontFamily: "monospace", fontSize: "9px", color: "#444", letterSpacing: "2px" }}>
+              STATUS
+            </span>
+          </div>
+          <div style={{ fontFamily: "monospace", fontSize: "11px", color: "#555", lineHeight: 1.8 }}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ color: "#666" }}>&gt; clientes_ativos</span>
+              <span style={{ color: "#888" }}>OK</span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ color: "#666" }}>&gt; projetos_2024</span>
+              <span style={{ color: "#888" }}>12+</span>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ color: "#666" }}>&gt; disponibilidade</span>
+              <motion.span
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                style={{ color: ACCENT_BLUE }}
+              >
+                OPEN
+              </motion.span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: phase >= 7 ? 1 : 0 }}
+        transition={{ duration: 1 }}
+        style={{
+          position: "absolute",
+          bottom: "24px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "8px",
+        }}
+      >
+        <motion.div
+          animate={{ y: [0, 6, 0], opacity: [0.3, 0.7, 0.3] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          style={{
+            width: "1px",
+            height: "24px",
+            backgroundColor: "#333",
+          }}
+        />
+        <span style={{ fontFamily: "monospace", fontSize: "8px", color: "#333", letterSpacing: "2px" }}>
+          SCROLL
+        </span>
+      </motion.div>
+    </section>
+  );
+}
+
 // Mobile Hero Grid - simplified 2-column version
 function MobileHeroGrid() {
   const contentCells = 8; // 2 columns x 4 rows
@@ -1329,6 +1642,428 @@ function TechGrid() {
   );
 }
 
+// Mobile Tech Section - Categorized horizontal scrolls
+function MobileTechSection() {
+  const categories = [
+    { id: "ai", name: "IA & Modelos", prefix: "AI", color: ACCENT_BLUE },
+    { id: "ml", name: "Machine Learning", prefix: "ML", color: "#8b5cf6" },
+    { id: "lng", name: "Linguagens", prefix: "LNG", color: "#10b981" },
+    { id: "frm", name: "Frameworks", prefix: "FRM", color: "#f59e0b" },
+    { id: "aut", name: "Automação", prefix: "AUT", color: "#ec4899" },
+    { id: "cld", name: "Cloud & Infra", prefix: "CLD", color: "#06b6d4" },
+    { id: "db", name: "Databases", prefix: "DB", color: "#84cc16" },
+    { id: "api", name: "APIs", prefix: "API", color: "#f97316" },
+  ];
+
+  const getTechsByCategory = (prefix: string) => {
+    return techData.filter(t => t.code.startsWith(prefix));
+  };
+
+  return (
+    <section style={{ backgroundColor: "#000", padding: "60px 0" }}>
+      {/* Header */}
+      <div style={{ padding: "0 20px", marginBottom: "32px" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <span
+            style={{
+              display: "inline-block",
+              fontFamily: "monospace",
+              fontSize: "10px",
+              fontWeight: 500,
+              color: "#fff",
+              textTransform: "uppercase",
+              letterSpacing: "2px",
+              marginBottom: "12px",
+            }}
+          >
+            [SYS:MODELS]
+          </span>
+          <h2
+            style={{
+              fontSize: "26px",
+              fontWeight: 300,
+              lineHeight: 1.2,
+            }}
+          >
+            <span style={{ fontWeight: 500 }}>Tecnologias</span> que{" "}
+            <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic" }}>
+              dominamos
+            </span>
+          </h2>
+        </motion.div>
+      </div>
+
+      {/* Categories with horizontal scroll */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+        {categories.map((category, catIndex) => {
+          const techs = getTechsByCategory(category.prefix);
+          return (
+            <motion.div
+              key={category.id}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ duration: 0.4, delay: catIndex * 0.05 }}
+            >
+              {/* Category header */}
+              <div
+                style={{
+                  padding: "0 20px",
+                  marginBottom: "12px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <div
+                  style={{
+                    width: "8px",
+                    height: "8px",
+                    backgroundColor: category.color,
+                    opacity: 0.8,
+                  }}
+                />
+                <span
+                  style={{
+                    fontFamily: "monospace",
+                    fontSize: "11px",
+                    color: "#888",
+                    letterSpacing: "1px",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {category.name}
+                </span>
+              </div>
+
+              {/* Horizontal scroll container */}
+              <div
+                style={{
+                  overflowX: "auto",
+                  overflowY: "hidden",
+                  WebkitOverflowScrolling: "touch",
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none",
+                  paddingLeft: "20px",
+                  paddingRight: "20px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "8px",
+                    paddingBottom: "4px",
+                  }}
+                >
+                  {techs.map((tech, techIndex) => (
+                    <motion.div
+                      key={tech.code}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.3, delay: techIndex * 0.03 }}
+                      whileTap={{ scale: 0.95 }}
+                      style={{
+                        flexShrink: 0,
+                        padding: "12px 16px",
+                        backgroundColor: "#0a0a0a",
+                        border: "1px solid #1a1a1a",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "4px",
+                        minWidth: "100px",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: "monospace",
+                          fontSize: "9px",
+                          color: category.color,
+                          opacity: 0.7,
+                        }}
+                      >
+                        {tech.code}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "13px",
+                          fontWeight: 500,
+                          color: "#e5e5e5",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {tech.label}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Bottom stats */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        style={{
+          margin: "32px 20px 0",
+          padding: "16px",
+          border: "1px solid #1a1a1a",
+          display: "flex",
+          justifyContent: "space-around",
+        }}
+      >
+        <div style={{ textAlign: "center" }}>
+          <span style={{ display: "block", fontFamily: "monospace", fontSize: "20px", color: ACCENT_BLUE, fontWeight: 500 }}>
+            80+
+          </span>
+          <span style={{ fontFamily: "monospace", fontSize: "9px", color: "#555", letterSpacing: "1px" }}>
+            TECNOLOGIAS
+          </span>
+        </div>
+        <div style={{ width: "1px", backgroundColor: "#1a1a1a" }} />
+        <div style={{ textAlign: "center" }}>
+          <span style={{ display: "block", fontFamily: "monospace", fontSize: "20px", color: "#fff", fontWeight: 500 }}>
+            8
+          </span>
+          <span style={{ fontFamily: "monospace", fontSize: "9px", color: "#555", letterSpacing: "1px" }}>
+            CATEGORIAS
+          </span>
+        </div>
+        <div style={{ width: "1px", backgroundColor: "#1a1a1a" }} />
+        <div style={{ textAlign: "center" }}>
+          <motion.span
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            style={{ display: "block", fontFamily: "monospace", fontSize: "20px", color: "#10b981", fontWeight: 500 }}
+          >
+            ●
+          </motion.span>
+          <span style={{ fontFamily: "monospace", fontSize: "9px", color: "#555", letterSpacing: "1px" }}>
+            ATUALIZADO
+          </span>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+// Mobile Methodology Section - Timeline design
+function MobileMethodologySection() {
+  const steps = [
+    {
+      phase: "01",
+      title: "Diagnóstico",
+      description: "Mapeamento completo de processos, sistemas e gargalos existentes.",
+      icon: "◉"
+    },
+    {
+      phase: "02",
+      title: "Arquitetura",
+      description: "Desenho técnico da solução com definição de tecnologias e integrações.",
+      icon: "◎"
+    },
+    {
+      phase: "03",
+      title: "Execução",
+      description: "Desenvolvimento iterativo com validações constantes e ajustes em tempo real.",
+      icon: "○"
+    },
+    {
+      phase: "04",
+      title: "Operação",
+      description: "Implantação assistida, treinamento e suporte estratégico contínuo.",
+      icon: "●"
+    },
+  ];
+
+  return (
+    <section id="metodologia" style={{ padding: "60px 0", backgroundColor: "#000" }}>
+      <div style={{ padding: "0 20px" }}>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          style={{ marginBottom: "40px" }}
+        >
+          <span
+            style={{
+              display: "inline-block",
+              fontFamily: "monospace",
+              fontSize: "10px",
+              fontWeight: 500,
+              color: "#fff",
+              textTransform: "uppercase",
+              letterSpacing: "2px",
+              marginBottom: "12px",
+            }}
+          >
+            [SYS:METHOD]
+          </span>
+          <h2
+            style={{
+              fontSize: "26px",
+              fontWeight: 300,
+              lineHeight: 1.2,
+              marginBottom: "16px",
+            }}
+          >
+            Como <span style={{ fontWeight: 500 }}>operamos</span>
+          </h2>
+          <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#666", fontWeight: 300 }}>
+            Metodologia estruturada para entregas consistentes.
+          </p>
+        </motion.div>
+
+        {/* Timeline */}
+        <div style={{ position: "relative" }}>
+          {/* Vertical line */}
+          <div
+            style={{
+              position: "absolute",
+              left: "19px",
+              top: "20px",
+              bottom: "20px",
+              width: "1px",
+              backgroundColor: "#1a1a1a",
+            }}
+          />
+
+          {/* Steps */}
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.phase}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              style={{
+                position: "relative",
+                paddingLeft: "50px",
+                paddingBottom: index === steps.length - 1 ? "0" : "32px",
+              }}
+            >
+              {/* Phase number circle */}
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.1 + 0.2 }}
+                style={{
+                  position: "absolute",
+                  left: "0",
+                  top: "0",
+                  width: "40px",
+                  height: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "#000",
+                  border: "1px solid #333",
+                  zIndex: 1,
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "monospace",
+                    fontSize: "14px",
+                    fontWeight: 500,
+                    color: ACCENT_BLUE,
+                  }}
+                >
+                  {step.phase}
+                </span>
+              </motion.div>
+
+              {/* Content card */}
+              <div
+                style={{
+                  padding: "16px",
+                  backgroundColor: "#0a0a0a",
+                  border: "1px solid #1a1a1a",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
+                  <h3
+                    style={{
+                      fontSize: "16px",
+                      fontWeight: 500,
+                      color: "#f5f0e8",
+                    }}
+                  >
+                    {step.title}
+                  </h3>
+                  <motion.div
+                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                    style={{
+                      width: "5px",
+                      height: "5px",
+                      backgroundColor: index === 0 ? ACCENT_BLUE : "#fff",
+                    }}
+                  />
+                </div>
+                <p
+                  style={{
+                    fontSize: "13px",
+                    lineHeight: 1.6,
+                    color: "#666",
+                    fontWeight: 300,
+                  }}
+                >
+                  {step.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Bottom indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          style={{
+            marginTop: "32px",
+            padding: "16px",
+            border: "1px solid #1a1a1a",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "12px",
+          }}
+        >
+          <motion.div
+            animate={{
+              backgroundColor: [ACCENT_BLUE, "#fff", ACCENT_BLUE],
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
+            style={{
+              width: "6px",
+              height: "6px",
+            }}
+          />
+          <span style={{ fontFamily: "monospace", fontSize: "10px", color: "#555", letterSpacing: "2px" }}>
+            CICLO CONTÍNUO
+          </span>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 // Mobile About Section - Linear layout without scroll-pinning
 function MobileAboutSection() {
   const [revealed, setRevealed] = useState(false);
@@ -1410,21 +2145,21 @@ function MobileAboutSection() {
       <h2
         style={{
           fontSize: "28px",
-          fontWeight: 300,
+          fontWeight: 200,
           lineHeight: 1.3,
           marginBottom: "24px",
         }}
       >
         <TriggeredRevealText active={revealed} delay={0}>
-          O que é a{" "}
+          O que é a&nbsp;
         </TriggeredRevealText>
         <TriggeredRevealText active={revealed} delay={80}>
-          <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic", fontWeight: 400, color: "#fff" }}>
+          <span style={{ fontWeight: 600, color: "#fff" }}>
             Human Code
           </span>
         </TriggeredRevealText>
         <TriggeredRevealText active={revealed} delay={160}>
-          ?
+          &nbsp;?
         </TriggeredRevealText>
       </h2>
 
@@ -1547,11 +2282,23 @@ function ScrollPinnedAbout() {
   const [gridPhases, setGridPhases] = useState([0, 0, 0, 0]);
   const [titleRevealed, setTitleRevealed] = useState(false);
 
-  // Trigger title reveal animation on mount
+  // Trigger title reveal animation when section enters viewport
   useEffect(() => {
-    const timer = setTimeout(() => setTitleRevealed(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !titleRevealed) {
+          setTimeout(() => setTitleRevealed(true), 100);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [titleRevealed]);
 
   // Thresholds for each phase
   useEffect(() => {
@@ -1700,20 +2447,20 @@ function ScrollPinnedAbout() {
             <h2
               style={{
                 fontSize: "clamp(36px, 6vw, 64px)",
-                fontWeight: 300,
+                fontWeight: 200,
                 lineHeight: 1.2,
               }}
             >
               <TriggeredRevealText active={titleRevealed} delay={0}>
-                O que é a{" "}
+                O que é a&nbsp;
               </TriggeredRevealText>
               <TriggeredRevealText active={titleRevealed} delay={100}>
-                <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic", fontWeight: 400, color: "#fff" }}>
+                <span style={{ fontWeight: 600, color: "#fff" }}>
                   Human Code
                 </span>
               </TriggeredRevealText>
               <TriggeredRevealText active={titleRevealed} delay={200}>
-                ?
+                &nbsp;?
               </TriggeredRevealText>
             </h2>
           </motion.div>
@@ -1755,21 +2502,21 @@ function ScrollPinnedAbout() {
               <h2
                 style={{
                   fontSize: "clamp(28px, 4vw, 40px)",
-                  fontWeight: 300,
+                  fontWeight: 200,
                   lineHeight: 1.2,
                   marginBottom: "24px",
                 }}
               >
                 <TriggeredRevealText active={phase >= 2} delay={0}>
-                  O que é a{" "}
+                  O que é a&nbsp;
                 </TriggeredRevealText>
                 <TriggeredRevealText active={phase >= 2} delay={80}>
-                  <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic", fontWeight: 400, color: "#fff" }}>
+                  <span style={{ fontWeight: 600, color: "#fff" }}>
                     Human Code
                   </span>
                 </TriggeredRevealText>
                 <TriggeredRevealText active={phase >= 2} delay={160}>
-                  ?
+                  &nbsp;?
                 </TriggeredRevealText>
               </h2>
 
@@ -1908,89 +2655,93 @@ export default function Home() {
       {!isMobile && <ScrollProgressLine />}
 
       {/* Hero */}
-      <section
-        id="home"
-        style={{
-          position: "relative",
-          paddingTop: isMobile ? "100px" : "180px",
-          paddingBottom: isMobile ? "60px" : "100px",
-          overflow: "hidden",
-        }}
-      >
-        <div style={responsiveHeroContainer}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: isMobile ? "column" : "row",
-              gap: isMobile ? "32px" : "40px",
-              alignItems: isMobile ? "flex-start" : "center",
-              justifyContent: "space-between",
-            }}
-          >
-            {/* Left Content */}
-            <div style={{ flex: "1 1 auto", maxWidth: isMobile ? "100%" : "600px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              {/* Badge */}
-              <BlinkReveal delay={200}>
-                <div style={{ marginBottom: isMobile ? "20px" : "24px" }}>
-                  <span
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "8px",
-                      padding: isMobile ? "6px 12px" : "8px 16px",
-                      backgroundColor: "transparent",
-                      border: "1px solid #1a1a1a",
-                      fontSize: isMobile ? "10px" : "11px",
-                      fontFamily: "monospace",
-                      color: "#888",
-                      textTransform: "uppercase",
-                      letterSpacing: "1px",
-                    }}
-                  >
-                    <motion.span
-                      animate={{ opacity: [0.4, 1, 0.4] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+      {isMobile ? (
+        <MobileHeroSection />
+      ) : (
+        <section
+          id="home"
+          style={{
+            position: "relative",
+            paddingTop: "180px",
+            paddingBottom: "100px",
+            overflow: "hidden",
+          }}
+        >
+          <div style={responsiveHeroContainer}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "40px",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              {/* Left Content */}
+              <div style={{ flex: "1 1 auto", maxWidth: "600px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                {/* Badge */}
+                <BlinkReveal delay={200}>
+                  <div style={{ marginBottom: "24px" }}>
+                    <span
                       style={{
-                        width: "6px",
-                        height: "6px",
-                        backgroundColor: "#fff",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "8px",
+                        padding: "8px 16px",
+                        backgroundColor: "transparent",
+                        border: "1px solid #1a1a1a",
+                        fontSize: "11px",
+                        fontFamily: "monospace",
+                        color: "#888",
+                        textTransform: "uppercase",
+                        letterSpacing: "1px",
                       }}
-                    />
-                    SYS:ACTIVE
-                  </span>
+                    >
+                      <motion.span
+                        animate={{ opacity: [0.4, 1, 0.4] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        style={{
+                          width: "6px",
+                          height: "6px",
+                          backgroundColor: "#fff",
+                        }}
+                      />
+                      SYS:ACTIVE
+                    </span>
+                  </div>
+                </BlinkReveal>
+
+                {/* Title */}
+                <HeroTitleReveal delay={350} />
+
+                {/* Description - line by line blink */}
+                <div
+                  style={{
+                    fontSize: "15px",
+                    lineHeight: 1.7,
+                    color: "#888",
+                    maxWidth: "480px",
+                    fontWeight: 300,
+                  }}
+                >
+                  <BlinkReveal delay={500}>
+                    <span style={{ display: "block" }}><span style={{ color: "#ccc", fontWeight: 400 }}>Automação completa</span>, pensada do zero para os processos</span>
+                  </BlinkReveal>
+                  <BlinkReveal delay={600}>
+                    <span style={{ display: "block" }}>que movem o <span style={{ color: "#ccc", fontWeight: 400 }}>seu negócio</span>.</span>
+                  </BlinkReveal>
+                  <BlinkReveal delay={700}>
+                    <span style={{ display: "block" }}>Não entregamos atalhos. Entregamos <span style={{ color: "#ccc", fontWeight: 400 }}>profundidade</span>.</span>
+                  </BlinkReveal>
                 </div>
-              </BlinkReveal>
-
-              {/* Title */}
-              <HeroTitleReveal delay={350} />
-
-              {/* Description - line by line blink */}
-              <div
-                style={{
-                  fontSize: isMobile ? "14px" : "15px",
-                  lineHeight: 1.7,
-                  color: "#888",
-                  maxWidth: isMobile ? "100%" : "480px",
-                  fontWeight: 300,
-                }}
-              >
-                <BlinkReveal delay={500}>
-                  <span style={{ display: "block" }}><span style={{ color: "#ccc", fontWeight: 400 }}>Automação completa</span>, pensada do zero para os processos</span>
-                </BlinkReveal>
-                <BlinkReveal delay={600}>
-                  <span style={{ display: "block" }}>que movem o <span style={{ color: "#ccc", fontWeight: 400 }}>seu negócio</span>.</span>
-                </BlinkReveal>
-                <BlinkReveal delay={700}>
-                  <span style={{ display: "block" }}>Não entregamos atalhos. Entregamos <span style={{ color: "#ccc", fontWeight: 400 }}>profundidade</span>.</span>
-                </BlinkReveal>
               </div>
-            </div>
 
-            {/* Right Grid - simplified on mobile */}
-            {isMobile ? <MobileHeroGrid /> : <HeroGrid />}
+              {/* Right Grid */}
+              <HeroGrid />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Image Carousel */}
       <ImageCarousel />
@@ -2475,115 +3226,119 @@ export default function Home() {
       </section>
 
       {/* Metodologia */}
-      <section id="metodologia" style={{ padding: isMobile ? "60px 0" : "120px 0", backgroundColor: "#000" }}>
-        <div style={responsiveContainer}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ marginBottom: "60px" }}
-          >
-            <span
-              style={{
-                display: "inline-block",
-                fontFamily: "monospace",
-                fontSize: "11px",
-                fontWeight: 500,
-                color: "#fff",
-                textTransform: "uppercase",
-                letterSpacing: "2px",
-                marginBottom: "16px",
-              }}
+      {isMobile ? (
+        <MobileMethodologySection />
+      ) : (
+        <section id="metodologia" style={{ padding: "120px 0", backgroundColor: "#000" }}>
+          <div style={responsiveContainer}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              style={{ marginBottom: "60px" }}
             >
-              [SYS:METHOD]
-            </span>
-            <h2
-              style={{
-                fontSize: "clamp(28px, 4vw, 40px)",
-                fontWeight: 300,
-                lineHeight: 1.2,
-                marginBottom: "20px",
-              }}
-            >
-              Como <span style={{ fontWeight: 500 }}>operamos</span>
-            </h2>
-            <p style={{ fontSize: "15px", lineHeight: 1.8, color: "#888", fontWeight: 300, maxWidth: "600px" }}>
-              Cada projeto segue uma <span style={{ color: "#ccc", fontWeight: 400 }}>metodologia estruturada</span>, desenvolvida para garantir entregas consistentes e alinhadas às necessidades reais do negócio.
-            </p>
-          </motion.div>
-
-          {/* Methodology Steps */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)",
-              gap: "1px",
-              backgroundColor: "#1a1a1a",
-              border: "1px solid #1a1a1a",
-            }}
-          >
-            {[
-              { phase: "01", title: "Diagnóstico", description: "Mapeamento completo de processos, sistemas e gargalos existentes." },
-              { phase: "02", title: "Arquitetura", description: "Desenho técnico da solução com definição de tecnologias e integrações." },
-              { phase: "03", title: "Execução", description: "Desenvolvimento iterativo com validações constantes e ajustes em tempo real." },
-              { phase: "04", title: "Operação", description: "Implantação assistida, treinamento e suporte estratégico contínuo." },
-            ].map((step, index) => (
-              <motion.div
-                key={step.phase}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+              <span
                 style={{
-                  backgroundColor: "#000",
-                  padding: isMobile ? "20px 16px" : "32px 24px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: isMobile ? "12px" : "16px",
+                  display: "inline-block",
+                  fontFamily: "monospace",
+                  fontSize: "11px",
+                  fontWeight: 500,
+                  color: "#fff",
+                  textTransform: "uppercase",
+                  letterSpacing: "2px",
+                  marginBottom: "16px",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span
+                [SYS:METHOD]
+              </span>
+              <h2
+                style={{
+                  fontSize: "clamp(28px, 4vw, 40px)",
+                  fontWeight: 300,
+                  lineHeight: 1.2,
+                  marginBottom: "20px",
+                }}
+              >
+                Como <span style={{ fontWeight: 500 }}>operamos</span>
+              </h2>
+              <p style={{ fontSize: "15px", lineHeight: 1.8, color: "#888", fontWeight: 300, maxWidth: "600px" }}>
+                Cada projeto segue uma <span style={{ color: "#ccc", fontWeight: 400 }}>metodologia estruturada</span>, desenvolvida para garantir entregas consistentes e alinhadas às necessidades reais do negócio.
+              </p>
+            </motion.div>
+
+            {/* Methodology Steps */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: "1px",
+                backgroundColor: "#1a1a1a",
+                border: "1px solid #1a1a1a",
+              }}
+            >
+              {[
+                { phase: "01", title: "Diagnóstico", description: "Mapeamento completo de processos, sistemas e gargalos existentes." },
+                { phase: "02", title: "Arquitetura", description: "Desenho técnico da solução com definição de tecnologias e integrações." },
+                { phase: "03", title: "Execução", description: "Desenvolvimento iterativo com validações constantes e ajustes em tempo real." },
+                { phase: "04", title: "Operação", description: "Implantação assistida, treinamento e suporte estratégico contínuo." },
+              ].map((step, index) => (
+                <motion.div
+                  key={step.phase}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  style={{
+                    backgroundColor: "#000",
+                    padding: "32px 24px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "16px",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                    <span
+                      style={{
+                        fontFamily: "monospace",
+                        fontSize: "24px",
+                        fontWeight: 300,
+                        color: "#333",
+                      }}
+                    >
+                      {step.phase}
+                    </span>
+                    <div style={{ flex: 1, height: "1px", backgroundColor: "#1a1a1a" }} />
+                  </div>
+                  <h3
                     style={{
-                      fontFamily: "monospace",
-                      fontSize: isMobile ? "18px" : "24px",
-                      fontWeight: 300,
-                      color: "#333",
+                      fontSize: "16px",
+                      fontWeight: 500,
+                      color: "#f5f0e8",
                     }}
                   >
-                    {step.phase}
-                  </span>
-                  <div style={{ flex: 1, height: "1px", backgroundColor: "#1a1a1a" }} />
-                </div>
-                <h3
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: 500,
-                    color: "#f5f0e8",
-                  }}
-                >
-                  {step.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: "13px",
-                    lineHeight: 1.6,
-                    color: "#666",
-                    fontWeight: 300,
-                  }}
-                >
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+                    {step.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      lineHeight: 1.6,
+                      color: "#666",
+                      fontWeight: 300,
+                    }}
+                  >
+                    {step.description}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* Blur divider */}
       <div
@@ -2785,47 +3540,51 @@ export default function Home() {
       </div>
 
       {/* Tecnologias - Terminal Grid Style - Full Screen */}
-      <section style={{ backgroundColor: "#000", minHeight: isMobile ? "auto" : "100vh", display: "flex", flexDirection: "column" }}>
-        {/* Header */}
-        <div style={{ padding: isMobile ? "40px 16px 24px" : "60px 24px 40px", textAlign: "center" }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span
-              style={{
-                display: "inline-block",
-                fontFamily: "monospace",
-                fontSize: "11px",
-                fontWeight: 500,
-                color: "#fff",
-                textTransform: "uppercase",
-                letterSpacing: "2px",
-                marginBottom: "16px",
-              }}
+      {isMobile ? (
+        <MobileTechSection />
+      ) : (
+        <section style={{ backgroundColor: "#000", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+          {/* Header */}
+          <div style={{ padding: "60px 24px 40px", textAlign: "center" }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
             >
-              [SYS:MODELS]
-            </span>
-            <h2
-              style={{
-                fontSize: "clamp(28px, 4vw, 42px)",
-                fontWeight: 300,
-                lineHeight: 1.2,
-                color: "#f5f0e8",
-              }}
-            >
-              <span style={{ fontWeight: 500 }}>Modelos</span> e <span style={{ fontWeight: 500 }}>tecnologias</span> que <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic", color: "#fff" }}>dominamos</span>
-            </h2>
-          </motion.div>
-        </div>
+              <span
+                style={{
+                  display: "inline-block",
+                  fontFamily: "monospace",
+                  fontSize: "11px",
+                  fontWeight: 500,
+                  color: "#fff",
+                  textTransform: "uppercase",
+                  letterSpacing: "2px",
+                  marginBottom: "16px",
+                }}
+              >
+                [SYS:MODELS]
+              </span>
+              <h2
+                style={{
+                  fontSize: "clamp(28px, 4vw, 42px)",
+                  fontWeight: 300,
+                  lineHeight: 1.2,
+                  color: "#f5f0e8",
+                }}
+              >
+                <span style={{ fontWeight: 500 }}>Modelos</span> e <span style={{ fontWeight: 500 }}>tecnologias</span> que <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic", color: "#fff" }}>dominamos</span>
+              </h2>
+            </motion.div>
+          </div>
 
-        {/* Full Width Grid - No padding, fills remaining space */}
-        <div style={{ flex: 1 }}>
-          <TechGrid />
-        </div>
-      </section>
+          {/* Full Width Grid - No padding, fills remaining space */}
+          <div style={{ flex: 1 }}>
+            <TechGrid />
+          </div>
+        </section>
+      )}
 
       {/* Artigos Preview */}
       <section id="artigos" style={{ padding: isMobile ? "16px 0 60px" : "16px 0 120px", backgroundColor: "#000" }}>
