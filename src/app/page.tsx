@@ -27,16 +27,16 @@ function HeroTitleReveal({ delay = 0 }: { delay?: number }) {
       }}
     >
       <LineReveal delay={delay}>
-        <span style={{ fontWeight: 500 }}>Soluções</span> tecnológicas
+        <span style={{ fontWeight: 500 }}>Sua operação</span>
       </LineReveal>{" "}
       <LineReveal delay={delay + 100}>
-        <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic" }}>sob medida</span>
+        <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic" }}>não foi feita</span>
       </LineReveal>{" "}
       <LineReveal delay={delay + 200}>
-        <span style={{ fontWeight: 300 }}>para empresas que</span>
+        <span style={{ fontWeight: 300 }}>para depender de</span>
       </LineReveal>{" "}
       <LineReveal delay={delay + 300}>
-        <span style={{ fontWeight: 500 }}>precisam de eficiência real</span>
+        <span style={{ fontWeight: 500 }}>processos manuais.</span>
       </LineReveal>
     </h1>
   );
@@ -1274,7 +1274,7 @@ function MobileHeroSection() {
               marginBottom: "8px",
             }}
           >
-            <span style={{ fontWeight: 500 }}>Soluções</span> tecnológicas
+            <span style={{ fontWeight: 500 }}>Sua operação</span>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1294,7 +1294,7 @@ function MobileHeroSection() {
                 color: "#fff",
               }}
             >
-              sob medida
+              não foi feita
             </span>
           </motion.div>
           <motion.div
@@ -1307,8 +1307,8 @@ function MobileHeroSection() {
               lineHeight: 1.2,
             }}
           >
-            para quem precisa de{" "}
-            <span style={{ color: ACCENT_BLUE }}>eficiência real</span>
+            para depender de{" "}
+            <span style={{ color: ACCENT_BLUE }}>processos manuais.</span>
           </motion.div>
         </div>
 
@@ -1325,8 +1325,7 @@ function MobileHeroSection() {
             maxWidth: "320px",
           }}
         >
-          Automação completa, pensada do zero para os processos que movem o{" "}
-          <span style={{ color: "#ccc", fontWeight: 400 }}>seu negócio</span>.
+          Somos a <span style={{ color: "#ccc", fontWeight: 400 }}>engenharia por trás da automação</span> que grandes empresas precisam para <span style={{ color: "#ccc", fontWeight: 400 }}>operar no ritmo do mercado</span>.
         </motion.p>
 
         {/* CTA Button */}
@@ -1351,7 +1350,7 @@ function MobileHeroSection() {
             textTransform: "uppercase",
           }}
         >
-          <span>Ver serviços</span>
+          <span>Conheça nossos serviços</span>
           <motion.span
             animate={{ x: [0, 4, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
@@ -1956,25 +1955,25 @@ function MobileMethodologySection() {
     {
       phase: "01",
       title: "Diagnóstico",
-      description: "Mapeamento completo de processos, sistemas e gargalos existentes.",
+      description: "Imersão na operação: processos, sistemas, dependências, gargalos e oportunidades mapeados em detalhe.",
       icon: "◉"
     },
     {
       phase: "02",
       title: "Arquitetura",
-      description: "Desenho técnico da solução com definição de tecnologias e integrações.",
+      description: "Projeto técnico completo da solução: tecnologias, integrações, cronograma e critérios de sucesso definidos.",
       icon: "◎"
     },
     {
       phase: "03",
       title: "Execução",
-      description: "Desenvolvimento iterativo com validações constantes e ajustes em tempo real.",
+      description: "Desenvolvimento em ciclos curtos com entregas parciais, validações reais e ajustes controlados.",
       icon: "○"
     },
     {
       phase: "04",
       title: "Operação",
-      description: "Implantação assistida, treinamento e suporte estratégico contínuo.",
+      description: "Implantação assistida, treinamento das equipes, documentação completa e sustentação ativa.",
       icon: "●"
     },
   ];
@@ -2015,7 +2014,7 @@ function MobileMethodologySection() {
             Como <span style={{ fontWeight: 500 }}>operamos</span>
           </h2>
           <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#666", fontWeight: 300 }}>
-            Metodologia estruturada para entregas consistentes.
+            Metodologia própria em quatro fases para eliminar incertezas.
           </p>
         </motion.div>
 
@@ -2354,7 +2353,7 @@ function MobileAboutSection() {
             fontStyle: "italic",
           }}
         >
-          "Somos uma empresa séria, técnica e extremamente comprometida com resultado."
+          "Se a tecnologia existe, nós implementamos. Se o processo pode ser melhor, nós redesenhamos."
         </p>
       </motion.div>
     </section>
@@ -2631,7 +2630,7 @@ function ScrollPinnedAbout() {
                 transition={{ duration: 0.6, ease: "easeOut" }}
               >
                 <p style={{ fontSize: "15px", lineHeight: 1.8, color: "#888", fontWeight: 300 }}>
-                  A <span style={{ color: "#ccc", fontWeight: 400 }}>Human Code Technology</span> (HCT) é uma empresa especializada em <span style={{ color: "#ccc", fontWeight: 400 }}>automação corporativa</span> sob medida. Atuamos com organizações que buscam reestruturar seus processos com <span style={{ color: "#ccc", fontWeight: 400 }}>profundidade, inteligência</span> e foco em <span style={{ color: "#ccc", fontWeight: 400 }}>resultados reais</span>.
+                  A <span style={{ color: "#ccc", fontWeight: 400 }}>Human Code Technology</span> (HCT) é uma empresa de <span style={{ color: "#ccc", fontWeight: 400 }}>automação corporativa e inteligência artificial</span> que atua na reestruturação de operações em empresas de médio e grande porte. Combinamos <span style={{ color: "#ccc", fontWeight: 400 }}>domínio tecnológico de ponta</span> com conhecimento profundo de processos para entregar <span style={{ color: "#ccc", fontWeight: 400 }}>soluções que funcionam na escala que o negócio exige</span>.
                 </p>
               </motion.div>
             </div>
@@ -2726,7 +2725,7 @@ function ScrollPinnedAbout() {
                 fontStyle: "italic",
               }}
             >
-              "Somos uma empresa séria, técnica e extremamente comprometida com resultado."
+              "Se a tecnologia existe, nós implementamos. Se o processo pode ser melhor, nós redesenhamos."
             </p>
           </motion.div>
         </div>
@@ -2830,13 +2829,13 @@ export default function Home() {
                   }}
                 >
                   <BlinkReveal delay={500}>
-                    <span style={{ display: "block" }}><span style={{ color: "#ccc", fontWeight: 400 }}>Automação completa</span>, pensada do zero para os processos</span>
+                    <span style={{ display: "block" }}>Somos a <span style={{ color: "#ccc", fontWeight: 400 }}>engenharia por trás da automação</span> que grandes</span>
                   </BlinkReveal>
                   <BlinkReveal delay={600}>
-                    <span style={{ display: "block" }}>que movem o <span style={{ color: "#ccc", fontWeight: 400 }}>seu negócio</span>.</span>
+                    <span style={{ display: "block" }}>empresas precisam para <span style={{ color: "#ccc", fontWeight: 400 }}>operar no ritmo do mercado</span>.</span>
                   </BlinkReveal>
                   <BlinkReveal delay={700}>
-                    <span style={{ display: "block" }}>Não entregamos atalhos. Entregamos <span style={{ color: "#ccc", fontWeight: 400 }}>profundidade</span>.</span>
+                    <span style={{ display: "block" }}>Do diagnóstico à execução. <span style={{ color: "#ccc", fontWeight: 400 }}>Sem atalhos. Sem improvisos.</span></span>
                   </BlinkReveal>
                 </div>
               </div>
@@ -3052,7 +3051,7 @@ export default function Home() {
                 color: "#000",
               }}
             >
-              Resultados que <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic" }}>falam</span>
+              O que já <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic" }}>entregamos</span>
             </h2>
           </motion.div>
 
@@ -3071,10 +3070,10 @@ export default function Home() {
             }}
           >
             {[
-              { value: "150+", num: 150, suffix: "+", label: "Processos automatizados" },
-              { value: "40%", num: 40, suffix: "%", label: "Redução média de custos operacionais" },
-              { value: "98%", num: 98, suffix: "%", label: "Taxa de satisfação dos clientes" },
-              { value: "24/7", num: 24, suffix: "/7", label: "Monitoramento e suporte técnico" },
+              { value: "2.4M+", num: 2400, suffix: "K+", label: "Tarefas automatizadas por mês" },
+              { value: "40%", num: 40, suffix: "%", label: "Redução média de custo operacional em 90 dias" },
+              { value: "R$12M+", num: 12, suffix: "M+", label: "Em economia gerada para nossos clientes" },
+              { value: "99.8%", num: 99, suffix: ".8%", label: "Uptime médio das soluções em produção" },
             ].map((metric, index) => (
               <MetricCard key={index} metric={metric} index={index} isMobile={isMobile} />
             ))}
@@ -3119,7 +3118,7 @@ export default function Home() {
                 Para <span style={{ fontWeight: 500 }}>quem</span> <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic" }}>atuamos</span>
               </h2>
               <p style={{ fontSize: "15px", lineHeight: 1.8, color: "#666", fontWeight: 300 }}>
-                Trabalhamos com <span style={{ color: "#000", fontWeight: 400 }}>empresas que entendem</span> que tecnologia não é custo — é <span style={{ color: "#000", fontWeight: 400 }}>infraestrutura estratégica</span>.
+                Atendemos <span style={{ color: "#000", fontWeight: 400 }}>organizações que operam em escala</span> e precisam de parceiros técnicos à altura da <span style={{ color: "#000", fontWeight: 400 }}>complexidade dos seus processos</span>.
               </p>
             </motion.div>
 
@@ -3145,45 +3144,56 @@ export default function Home() {
                 { code: "IND-05", name: "Energia", detail: "Utilities e renováveis" },
                 { code: "IND-06", name: "Educação", detail: "Instituições e edtechs" },
               ].map((industry, index) => (
-                <div
+                <motion.div
                   key={industry.code}
-                  style={{
-                    backgroundColor: "#f8f8f8",
-                    padding: isMobile ? "16px" : "24px",
-                  }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
-                  <span
-                    style={{
-                      display: "block",
-                      fontFamily: "monospace",
-                      fontSize: "9px",
-                      color: "#999",
-                      marginBottom: "8px",
-                    }}
+                  <MagicCard
+                    gradientSize={200}
+                    gradientColor="#f0f0f0"
+                    gradientOpacity={0.6}
+                    gradientFrom="#0066FF"
+                    gradientTo="#0044AA"
+                    style={{ backgroundColor: "#f8f8f8" }}
                   >
-                    {industry.code}
-                  </span>
-                  <span
-                    style={{
-                      display: "block",
-                      fontSize: "15px",
-                      fontWeight: 500,
-                      color: "#000",
-                      marginBottom: "4px",
-                    }}
-                  >
-                    {industry.name}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "12px",
-                      color: "#888",
-                      fontWeight: 300,
-                    }}
-                  >
-                    {industry.detail}
-                  </span>
-                </div>
+                    <div style={{ padding: isMobile ? "16px" : "24px" }}>
+                      <span
+                        style={{
+                          display: "block",
+                          fontFamily: "monospace",
+                          fontSize: "9px",
+                          color: "#999",
+                          marginBottom: "8px",
+                        }}
+                      >
+                        {industry.code}
+                      </span>
+                      <span
+                        style={{
+                          display: "block",
+                          fontSize: "15px",
+                          fontWeight: 500,
+                          color: "#000",
+                          marginBottom: "4px",
+                        }}
+                      >
+                        {industry.name}
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "12px",
+                          color: "#888",
+                          fontWeight: 300,
+                        }}
+                      >
+                        {industry.detail}
+                      </span>
+                    </div>
+                  </MagicCard>
+                </motion.div>
               ))}
             </motion.div>
           </div>
@@ -3244,13 +3254,13 @@ export default function Home() {
                   marginBottom: "32px",
                 }}
               >
-                Empresas <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic", color: "#fff" }}>eficientes</span> <span style={{ fontWeight: 500 }}>não nascem prontas.</span>
+                O mercado <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic", color: "#fff" }}>acelera</span>. <span style={{ fontWeight: 500 }}>Sua operação acompanha?</span>
               </h2>
               <p style={{ fontSize: "15px", lineHeight: 1.8, color: "#888", fontWeight: 300, marginBottom: "20px" }}>
-                Acreditamos que toda empresa, mais cedo ou mais tarde, será forçada a se adaptar à <span style={{ color: "#ccc", fontWeight: 400 }}>nova realidade</span> da automação inteligente.
+                Empresas que ainda dependem de processos manuais e sistemas desconectados estão perdendo margem, velocidade e capacidade de competir. Não é uma questão de {'"'}se{'"'}, é de <span style={{ color: "#ccc", fontWeight: 400 }}>quando</span>.
               </p>
               <p style={{ fontSize: "15px", lineHeight: 1.8, color: "#888", fontWeight: 300 }}>
-                Nossa missão é entregar <span style={{ color: "#ccc", fontWeight: 400 }}>automação de verdade</span>, que respeita o negócio e gera <span style={{ color: "#ccc", fontWeight: 400 }}>retorno concreto</span>.
+                Existimos para garantir que, quando esse momento chegar, sua empresa já esteja <span style={{ color: "#ccc", fontWeight: 400 }}>operando à frente</span>.
               </p>
             </motion.div>
 
@@ -3285,11 +3295,11 @@ export default function Home() {
                 </span>
               </div>
               <div style={{ fontFamily: "monospace", fontSize: "12px", lineHeight: 2, color: "#888" }}>
-                <div><span style={{ color: "#fff" }}>&gt;</span> consistência</div>
-                <div><span style={{ color: "#fff" }}>&gt;</span> estratégia</div>
-                <div><span style={{ color: "#fff" }}>&gt;</span> sofisticação</div>
-                <div><span style={{ color: "#fff" }}>&gt;</span> profundidade</div>
-                <div><span style={{ color: "#fff" }}>&gt;</span> eficiência</div>
+                <div><span style={{ color: "#fff" }}>&gt;</span> antecipação</div>
+                <div><span style={{ color: "#fff" }}>&gt;</span> infraestrutura</div>
+                <div><span style={{ color: "#fff" }}>&gt;</span> precisão</div>
+                <div><span style={{ color: "#fff" }}>&gt;</span> escala</div>
+                <div><span style={{ color: "#fff" }}>&gt;</span> domínio</div>
                 <motion.div
                   animate={{ opacity: [0, 1, 0] }}
                   transition={{ duration: 1, repeat: Infinity }}
@@ -3341,7 +3351,7 @@ export default function Home() {
                 Como <span style={{ fontWeight: 500 }}>operamos</span>
               </h2>
               <p style={{ fontSize: "15px", lineHeight: 1.8, color: "#888", fontWeight: 300, maxWidth: "600px" }}>
-                Cada projeto segue uma <span style={{ color: "#ccc", fontWeight: 400 }}>metodologia estruturada</span>, desenvolvida para garantir entregas consistentes e alinhadas às necessidades reais do negócio.
+                Cada projeto segue uma <span style={{ color: "#ccc", fontWeight: 400 }}>metodologia própria em quatro fases</span>, construída para eliminar incertezas e entregar resultados desde o primeiro ciclo.
               </p>
             </motion.div>
 
@@ -3360,10 +3370,10 @@ export default function Home() {
               }}
             >
               {[
-                { phase: "01", title: "Diagnóstico", description: "Mapeamento completo de processos, sistemas e gargalos existentes." },
-                { phase: "02", title: "Arquitetura", description: "Desenho técnico da solução com definição de tecnologias e integrações." },
-                { phase: "03", title: "Execução", description: "Desenvolvimento iterativo com validações constantes e ajustes em tempo real." },
-                { phase: "04", title: "Operação", description: "Implantação assistida, treinamento e suporte estratégico contínuo." },
+                { phase: "01", title: "Diagnóstico", description: "Imersão na operação: processos, sistemas, dependências, gargalos e oportunidades mapeados em detalhe." },
+                { phase: "02", title: "Arquitetura", description: "Projeto técnico completo da solução: tecnologias, integrações, cronograma e critérios de sucesso definidos antes da primeira linha de código." },
+                { phase: "03", title: "Execução", description: "Desenvolvimento em ciclos curtos com entregas parciais, validações reais e ajustes controlados." },
+                { phase: "04", title: "Operação", description: "Implantação assistida, treinamento das equipes, documentação completa e sustentação ativa da solução." },
               ].map((step, index) => (
                 <motion.div
                   key={step.phase}
@@ -3489,7 +3499,7 @@ export default function Home() {
                 Nosso <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic", color: "#fff" }}>compromisso</span>
               </h2>
               <p style={{ fontSize: "15px", lineHeight: 1.8, color: "#888", fontWeight: 300 }}>
-                Trabalhamos com <span style={{ color: "#ccc", fontWeight: 400 }}>transparência absoluta</span> e responsabilidade técnica. Cada decisão é documentada, cada entrega é mensurável.
+                Quando uma empresa confia a operação a um parceiro externo, precisa ter <span style={{ color: "#ccc", fontWeight: 400 }}>garantias concretas</span>, não discurso. É assim que trabalhamos.
               </p>
             </motion.div>
 
@@ -3502,70 +3512,85 @@ export default function Home() {
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr",
+                gap: "1px",
+                backgroundColor: "#1a1a1a",
                 border: "1px solid #1a1a1a",
-                borderBottom: "none",
               }}
             >
               {[
-                { code: "PRC-01", principle: "Sem dependência tecnológica", detail: "Você mantém controle total sobre seus sistemas e dados." },
-                { code: "PRC-02", principle: "Documentação completa", detail: "Cada projeto entregue com manuais técnicos e operacionais." },
-                { code: "PRC-03", principle: "Resultados mensuráveis", detail: "KPIs definidos no início, acompanhados até o final." },
-                { code: "PRC-04", principle: "Suporte contínuo", detail: "Acompanhamento pós-implantação com ajustes e otimizações." },
+                { code: "PRC-01", principle: "Independência total", detail: "Sua operação nunca fica refém da HCT. Sistemas, dados e código são seus. Sempre." },
+                { code: "PRC-02", principle: "Documentação técnica completa", detail: "Cada projeto é entregue com documentação que permite a qualquer equipe técnica dar continuidade." },
+                { code: "PRC-03", principle: "Resultados com prazo", detail: "KPIs definidos antes da execução, acompanhados em tempo real e reportados até a estabilização." },
+                { code: "PRC-04", principle: "Sustentação ativa", detail: "Pós-implantação com monitoramento contínuo, correções proativas e ciclos de evolução." },
               ].map((item, index) => (
-                <div
+                <motion.div
                   key={item.code}
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: isMobile ? "12px" : "16px",
-                    padding: isMobile ? "16px" : "20px 24px",
-                    borderBottom: "1px solid #1a1a1a",
-                    backgroundColor: "#000",
-                  }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
-                  <span
-                    style={{
-                      fontFamily: "monospace",
-                      fontSize: "9px",
-                      color: "#444",
-                      marginTop: "4px",
-                    }}
+                  <MagicCard
+                    gradientSize={200}
+                    gradientColor="#111"
+                    gradientOpacity={0.7}
+                    gradientFrom="#0066FF"
+                    gradientTo="#003399"
+                    style={{ backgroundColor: "#000" }}
                   >
-                    {item.code}
-                  </span>
-                  <div style={{ flex: 1 }}>
-                    <span
+                    <div
                       style={{
-                        display: "block",
-                        fontSize: "14px",
-                        fontWeight: 500,
-                        color: "#f5f0e8",
-                        marginBottom: "4px",
+                        display: "flex",
+                        alignItems: "flex-start",
+                        gap: isMobile ? "12px" : "16px",
+                        padding: isMobile ? "16px" : "20px 24px",
                       }}
                     >
-                      {item.principle}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "12px",
-                        color: "#666",
-                        fontWeight: 300,
-                      }}
-                    >
-                      {item.detail}
-                    </span>
-                  </div>
-                  <motion.div
-                    animate={{ opacity: [0.2, 0.6, 0.2] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
-                    style={{
-                      width: "4px",
-                      height: "4px",
-                      backgroundColor: "#fff",
-                      marginTop: "8px",
-                    }}
-                  />
-                </div>
+                      <span
+                        style={{
+                          fontFamily: "monospace",
+                          fontSize: "9px",
+                          color: "#444",
+                          marginTop: "4px",
+                        }}
+                      >
+                        {item.code}
+                      </span>
+                      <div style={{ flex: 1 }}>
+                        <span
+                          style={{
+                            display: "block",
+                            fontSize: "14px",
+                            fontWeight: 500,
+                            color: "#f5f0e8",
+                            marginBottom: "4px",
+                          }}
+                        >
+                          {item.principle}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: "12px",
+                            color: "#666",
+                            fontWeight: 300,
+                          }}
+                        >
+                          {item.detail}
+                        </span>
+                      </div>
+                      <motion.div
+                        animate={{ opacity: [0.2, 0.6, 0.2] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                        style={{
+                          width: "4px",
+                          height: "4px",
+                          backgroundColor: "#fff",
+                          marginTop: "8px",
+                        }}
+                      />
+                    </div>
+                  </MagicCard>
+                </motion.div>
               ))}
             </motion.div>
           </div>
@@ -3594,7 +3619,7 @@ export default function Home() {
                 lineHeight: 1.7,
               }}
             >
-              "Não vendemos promessas. <span style={{ color: "#f5f0e8", fontWeight: 500 }}>Entregamos infraestrutura</span> que funciona, escala e <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic", color: "#fff" }}>gera valor</span> desde o primeiro dia."
+              Não apresentamos promessas. <span style={{ color: "#f5f0e8", fontWeight: 500 }}>Apresentamos escopo, prazo e resultado</span> e <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic", color: "#fff" }}>entregamos os três</span>.
             </p>
           </motion.div>
         </div>
@@ -3723,9 +3748,9 @@ export default function Home() {
             }}
           >
             {[
-              { code: "ART-01", title: "Por que as empresas precisam de IA agente agora", tag: "AGENTIC AI" },
-              { code: "ART-02", title: "O impacto real da automação no desempenho financeiro", tag: "FINANCE" },
-              { code: "ART-03", title: "Como CEOs tomam decisões tecnológicas", tag: "STRATEGY" },
+              { code: "ART-01", title: "Por que IA agente é a próxima camada da automação corporativa", tag: "AGENTIC AI" },
+              { code: "ART-02", title: "O retorno financeiro real da automação em operações de escala", tag: "FINANCE" },
+              { code: "ART-03", title: "O que lideranças precisam saber antes de decidir sobre tecnologia", tag: "STRATEGY" },
               { code: "ART-04", title: "A corrida trilionária da IA nos próximos 5 anos", tag: "MARKET" },
             ].map((article, index) => (
               <ArticleCard
@@ -3774,10 +3799,10 @@ export default function Home() {
                   color: "#000",
                 }}
               >
-                Vamos <span style={{ fontWeight: 500 }}>construir</span> algo <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic" }}>juntos</span>.
+                Pronto para <span style={{ fontWeight: 500 }}>reestruturar</span> sua <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic" }}>operação</span>?
               </h2>
               <p style={{ fontSize: "15px", lineHeight: 1.8, color: "#666", fontWeight: 300 }}>
-                Entre em contato para discutir como podemos <span style={{ color: "#000", fontWeight: 400 }}>transformar seus processos</span> com automação inteligente.
+                Fale com a nossa equipe. O primeiro passo é um <span style={{ color: "#000", fontWeight: 400 }}>diagnóstico técnico</span> para entender onde sua empresa está e até onde ela pode chegar.
               </p>
             </motion.div>
 

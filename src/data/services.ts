@@ -1,10 +1,10 @@
 export const servicesData = [
-  { code: "SRV-01", title: "Automacao Estrategica", description: "Processos internos de ponta a ponta, com foco em performance e controle." },
-  { code: "SRV-02", title: "Integracao de IA", description: "Agentes, fluxos e assistentes com IA trabalhando a favor do negocio." },
-  { code: "SRV-03", title: "Desenvolvimento Sob Medida", description: "Dashboards, sistemas e integracoes criados para desafios especificos." },
-  { code: "SRV-04", title: "Consultoria Executiva", description: "Decisoes tecnicas e estrategicas para CEOs e gestores." },
-  { code: "SRV-05", title: "Arquitetura de Fluxos", description: "Informacoes e tarefas fluindo sem ruidos ou gargalos invisiveis." },
-  { code: "SRV-06", title: "Suporte Estrategico", description: "Ajustes finos, upgrades e suporte consultivo continuo." },
-  { code: "SRV-07", title: "Orquestracao de Sistemas", description: "Ferramentas unificadas em um ecossistema eficiente e integrado." },
-  { code: "SRV-08", title: "Paineis e Indicadores", description: "Dashboards visuais com metricas acionaveis para decisoes rapidas." },
+  { code: "SRV-01", title: "Automação de Operações", description: "Redesenho e automação completa de processos internos, do fluxo manual à operação autônoma." },
+  { code: "SRV-02", title: "Inteligência Artificial Aplicada", description: "Agentes inteligentes, modelos de linguagem e assistentes de IA integrados ao contexto real do negócio." },
+  { code: "SRV-03", title: "Desenvolvimento Sob Medida", description: "Plataformas, sistemas e integrações construídas do zero para desafios que soluções prontas não resolvem." },
+  { code: "SRV-04", title: "Consultoria Técnica para Lideranças", description: "Apoio direto a CEOs, CTOs e conselhos na tomada de decisões tecnológicas de alto impacto." },
+  { code: "SRV-05", title: "Arquitetura de Fluxos", description: "Eliminação de gargalos invisíveis no tráfego de informações e tarefas entre equipes e sistemas." },
+  { code: "SRV-06", title: "Sustentação e Evolução Contínua", description: "Monitoramento ativo, otimizações de performance e evolução técnica das soluções em produção." },
+  { code: "SRV-07", title: "Orquestração de Ecossistemas", description: "Unificação de múltiplas ferramentas e plataformas em uma infraestrutura integrada e governável." },
+  { code: "SRV-08", title: "Painéis e Inteligência de Dados", description: "Dashboards em tempo real com indicadores operacionais e estratégicos para decisão imediata." },
 ];

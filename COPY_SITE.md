@@ -1,4 +1,4 @@
-# Human Code Technology - Copy Completo do Site
+# Human Code Technology - Copy Revisado v2
 
 ---
 
@@ -7,25 +7,25 @@
 **Tag:** `[SYS:ACTIVE]` (com indicador pulsante)
 
 **Titulo principal** (revela linha por linha com barra branca):
-> **Soluções** tecnológicas *sob medida* para empresas que **precisam de eficiência real**
+> **Sua operação** *não foi feita* para depender de **processos manuais.**
 
 **Descricao:**
-> **Automação completa**, pensada do zero para os processos
-> que movem o **seu negócio**.
-> Não entregamos atalhos. Entregamos **profundidade**.
+> Somos a **engenharia por trás da automação** que grandes
+> empresas precisam para **operar no ritmo do mercado**.
+> Do diagnóstico à execução. **Sem atalhos. Sem improvisos.**
 
 ### Visual
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │  ● SYS:ACTIVE                                                   │
 │                                                                  │
-│  Soluções tecnológicas          ┌──┬──┬──┬──┐                   │
-│  sob medida                     │01│02│03│04│  ← grid 4x10      │
-│  para empresas que              │05│06│07│08│    com dados       │
-│  precisam de eficiência real    │09│10│11│12│    atualizando     │
+│  Sua operação                   ┌──┬──┬──┬──┐                   │
+│  não foi feita                  │01│02│03│04│  ← grid 4x10      │
+│  para depender de               │05│06│07│08│    com dados       │
+│  processos manuais.             │09│10│11│12│    atualizando     │
 │                                 │..│..│..│..│    aleatoriamente  │
-│  Automação completa, pensada    └──┴──┴──┴──┘                   │
-│  do zero para os processos...                                    │
+│  Somos a engenharia por trás    └──┴──┴──┴──┘                   │
+│  da automação que grandes...                                     │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -79,7 +79,7 @@
 **Titulo:** O que é a **Human Code** ?
 
 **Descricao:**
-> A **Human Code Technology** (HCT) é uma empresa especializada em **automação corporativa** sob medida. Atuamos com organizações que buscam reestruturar seus processos com **profundidade, inteligência** e foco em **resultados reais**.
+> A **Human Code Technology** (HCT) é uma empresa de **automação corporativa e inteligência artificial** que atua na reestruturação de operações em empresas de médio e grande porte. Combinamos **domínio tecnológico de ponta** com conhecimento profundo de processos para entregar **soluções que funcionam na escala que o negócio exige**.
 
 **Grid de informacoes:**
 | Codigo | Area |
@@ -90,7 +90,7 @@
 | 004 | Execução Técnica |
 
 **Citacao:**
-> *"Somos uma empresa séria, técnica e extremamente comprometida com resultado."*
+> *"Se a tecnologia existe, nós implementamos. Se o processo pode ser melhor, nós redesenhamos."*
 
 ### Visual (Desktop - Scroll Pinned)
 ```
@@ -110,11 +110,11 @@ FASE 2+ (layout normal, 2 colunas):
 │  O que é a Human Code ?          │  │ 002  Inteligência IA    │  │
 │                                  │  │ 003  Eng. de Processos  │  │
 │  A Human Code Technology (HCT)   │  │ 004  Execução Técnica   │  │
-│  é uma empresa especializada...  │  └─────────────────────────┘  │
+│  é uma empresa de automação...   │  └─────────────────────────┘  │
 │                                  │                               │
 │                                  │  ┌─────────────────────────┐  │
-│                                  │  │ "Somos uma empresa      │  │
-│                                  │  │  séria, técnica..."     │  │
+│                                  │  │ "Se a tecnologia existe │  │
+│                                  │  │  nós implementamos..."  │  │
 │                                  │  └─────────────────────────┘  │
 └─────────────────────────────────┴───────────────────────────────┘
 ```
@@ -132,14 +132,14 @@ FASE 2+ (layout normal, 2 colunas):
 
 | Codigo | Servico | Descricao |
 |--------|---------|-----------|
-| SRV-01 | Automação Estratégica | Processos internos de ponta a ponta, com foco em performance e controle. |
-| SRV-02 | Integração de IA | Agentes, fluxos e assistentes com IA trabalhando a favor do negócio. |
-| SRV-03 | Desenvolvimento Sob Medida | Dashboards, sistemas e integrações criados para desafios específicos. |
-| SRV-04 | Consultoria Executiva | Decisões técnicas e estratégicas para CEOs e gestores. |
-| SRV-05 | Arquitetura de Fluxos | Informações e tarefas fluindo sem ruídos ou gargalos invisíveis. |
-| SRV-06 | Suporte Estratégico | Ajustes finos, upgrades e suporte consultivo contínuo. |
-| SRV-07 | Orquestração de Sistemas | Ferramentas unificadas em um ecossistema eficiente e integrado. |
-| SRV-08 | Painéis e Indicadores | Dashboards visuais com métricas acionáveis para decisões rápidas. |
+| SRV-01 | Automação de Operações | Redesenho e automação completa de processos internos — do fluxo manual à operação autônoma. |
+| SRV-02 | Inteligência Artificial Aplicada | Agentes inteligentes, modelos de linguagem e assistentes de IA integrados ao contexto real do negócio. |
+| SRV-03 | Desenvolvimento Sob Medida | Plataformas, sistemas e integrações construídas do zero para desafios que soluções prontas não resolvem. |
+| SRV-04 | Consultoria Técnica para Lideranças | Apoio direto a CEOs, CTOs e conselhos na tomada de decisões tecnológicas de alto impacto. |
+| SRV-05 | Arquitetura de Fluxos | Eliminação de gargalos invisíveis no tráfego de informações e tarefas entre equipes e sistemas. |
+| SRV-06 | Sustentação e Evolução Contínua | Monitoramento ativo, otimizações de performance e evolução técnica das soluções em produção. |
+| SRV-07 | Orquestração de Ecossistemas | Unificação de múltiplas ferramentas e plataformas em uma infraestrutura integrada e governável. |
+| SRV-08 | Painéis e Inteligência de Dados | Dashboards em tempo real com indicadores operacionais e estratégicos para decisão imediata. |
 
 ### Visual
 ```
@@ -148,9 +148,10 @@ Desktop (painel glass fixo, muda com scroll):
 │  ╔═══════════════════════════════════════════════════════════╗   │
 │  ║  Nossas frentes       SRV-03                  ● ● ◉ ●   ║   │
 │  ║  de atuação           DESENVOLVIMENTO SOB MEDIDA         ║   │
-│  ║                       Dashboards, sistemas e             ║   │
-│  ║                       integrações criados para           ║   │
-│  ║                       desafios específicos.              ║   │
+│  ║                       Plataformas, sistemas e            ║   │
+│  ║                       integrações construídas do zero    ║   │
+│  ║                       para desafios que soluções         ║   │
+│  ║                       prontas não resolvem.              ║   │
 │  ║                                          ●●●○○○○○       ║   │
 │  ╚═══════════════════════════════════════════════════════════╝   │
 └─────────────────────────────────────────────────────────────────┘
@@ -165,22 +166,23 @@ Desktop (painel glass fixo, muda com scroll):
 
 **Tag:** `[SYS:METRICS]`
 
-**Titulo:** Resultados que *falam*
+**Titulo:** O que já *entregamos*
 
 | Valor | Descricao |
 |-------|-----------|
-| 150+ | Processos automatizados |
-| 40% | Redução média de custos operacionais |
-| 98% | Taxa de satisfação dos clientes |
-| 24/7 | Monitoramento e suporte técnico |
+| 2.4M+ | Tarefas automatizadas por mês em operações ativas |
+| 40% | Redução média de custo operacional nos primeiros 90 dias |
+| R$12M+ | Em economia gerada para nossos clientes |
+| 99.8% | Uptime médio das soluções em produção |
 
 ### Visual
 ```
 ┌───────────────┬───────────────┬───────────────┬───────────────┐
 │               │               │               │               │
-│    150+       │     40%       │     98%       │    24/7       │
-│  Processos    │  Redução de   │  Satisfação   │ Monitoramento │
-│ automatizados │    custos     │  dos clientes │  e suporte    │
+│   2.4M+       │     40%       │   R$12M+      │   99.8%       │
+│   Tarefas     │  Redução de   │  Economia     │   Uptime      │
+│ automatizadas │ custo em      │  gerada para  │  médio em     │
+│   por mês     │ 90 dias       │  clientes     │  produção     │
 │               │               │               │               │
 └───────────────┴───────────────┴───────────────┴───────────────┘
 ```
@@ -198,7 +200,7 @@ Desktop (painel glass fixo, muda com scroll):
 **Titulo:** Para **quem** *atuamos*
 
 **Descricao:**
-> Trabalhamos com **empresas que entendem** que tecnologia não é custo — é **infraestrutura estratégica**.
+> Atendemos **organizações que operam em escala** e precisam de parceiros técnicos à altura da complexidade dos seus processos.
 
 | Codigo | Industria | Descricao |
 |--------|-----------|-----------|
@@ -218,10 +220,10 @@ Desktop (painel glass fixo, muda com scroll):
 │                                  │  │ IND-01    │ IND-02    │    │
 │  Para quem atuamos               │  │ Indústria │ Financeiro│    │
 │                                  │  ├───────────┼───────────┤    │
-│  Trabalhamos com empresas        │  │ IND-03    │ IND-04    │    │
-│  que entendem que tecnologia     │  │ Saúde     │ Varejo    │    │
-│  não é custo...                  │  ├───────────┼───────────┤    │
-│                                  │  │ IND-05    │ IND-06    │    │
+│  Atendemos organizações          │  │ IND-03    │ IND-04    │    │
+│  que operam em escala e          │  │ Saúde     │ Varejo    │    │
+│  precisam de parceiros           │  ├───────────┼───────────┤    │
+│  técnicos à altura...            │  │ IND-05    │ IND-06    │    │
 │                                  │  │ Energia   │ Educação  │    │
 │                                  │  └───────────┴───────────┘    │
 │         ── EMPRESAS DE MÉDIO E GRANDE PORTE ──                   │
@@ -236,23 +238,23 @@ Desktop (painel glass fixo, muda com scroll):
 
 **Tag:** `[SYS:VISION]`
 
-**Titulo:** Empresas *eficientes* **não nascem prontas.**
+**Titulo:** O mercado *acelera*. **Sua operação acompanha?**
 
 **Descricao:**
-> Acreditamos que toda empresa, mais cedo ou mais tarde, será forçada a se adaptar à **nova realidade** da automação inteligente.
+> Empresas que ainda dependem de processos manuais e sistemas desconectados estão perdendo margem, velocidade e capacidade de competir. Não é uma questão de "se" — é de **quando**.
 >
-> Nossa missão é entregar **automação de verdade**, que respeita o negócio e gera **retorno concreto**.
+> Existimos para garantir que, quando esse momento chegar, sua empresa já esteja **operando à frente**.
 
 **Terminal (lado direito):**
 ```
 ┌──────────────────────────┐
 │ ● mission.log            │  ← BorderBeam azul
 │                          │     percorrendo a borda
-│ > consistência           │
-│ > estratégia             │
-│ > sofisticação           │
-│ > profundidade           │
-│ > eficiência             │
+│ > antecipação            │
+│ > infraestrutura         │
+│ > precisão               │
+│ > escala                 │
+│ > domínio                │
 │ > _                      │  ← cursor piscando
 └──────────────────────────┘
 ```
@@ -262,12 +264,12 @@ Desktop (painel glass fixo, muda com scroll):
 ┌─────────────────────────────────┬───────────────────────────────┐
 │  [SYS:VISION]                   │  ┌──────────────────────────┐ │
 │                                  │  │ ● mission.log           │ │
-│  Empresas eficientes             │  │ > consistência          │ │
-│  não nascem prontas.             │  │ > estratégia            │ │
-│                                  │  │ > sofisticação          │ │
-│  Acreditamos que toda empresa... │  │ > profundidade          │ │
-│                                  │  │ > eficiência            │ │
-│  Nossa missão é entregar...      │  │ > _                     │ │
+│  O mercado acelera.              │  │ > antecipação           │ │
+│  Sua operação acompanha?         │  │ > infraestrutura        │ │
+│                                  │  │ > precisão              │ │
+│  Empresas que ainda dependem...  │  │ > escala                │ │
+│                                  │  │ > domínio               │ │
+│  Existimos para garantir que...  │  │ > _                     │ │
 │                                  │  └──────────────────────────┘ │
 └─────────────────────────────────┴───────────────────────────────┘
 ```
@@ -283,14 +285,14 @@ Desktop (painel glass fixo, muda com scroll):
 **Titulo:** Como **operamos**
 
 **Descricao:**
-> Cada projeto segue uma **metodologia estruturada**, desenvolvida para garantir entregas consistentes e alinhadas às necessidades reais do negócio.
+> Cada projeto segue uma **metodologia própria em quatro fases**, construída para eliminar incertezas e entregar resultados desde o primeiro ciclo.
 
 | Fase | Titulo | Descricao |
 |------|--------|-----------|
-| 01 | Diagnóstico | Mapeamento completo de processos, sistemas e gargalos existentes. |
-| 02 | Arquitetura | Desenho técnico da solução com definição de tecnologias e integrações. |
-| 03 | Execução | Desenvolvimento iterativo com validações constantes e ajustes em tempo real. |
-| 04 | Operação | Implantação assistida, treinamento e suporte estratégico contínuo. |
+| 01 | Diagnóstico | Imersão na operação: processos, sistemas, dependências, gargalos e oportunidades mapeados em detalhe. |
+| 02 | Arquitetura | Projeto técnico completo da solução — tecnologias, integrações, cronograma e critérios de sucesso definidos antes da primeira linha de código. |
+| 03 | Execução | Desenvolvimento em ciclos curtos com entregas parciais, validações reais e ajustes controlados. |
+| 04 | Operação | Implantação assistida, treinamento das equipes, documentação completa e sustentação ativa da solução. |
 
 ### Visual
 ```
@@ -300,19 +302,19 @@ Desktop (grid 4 colunas com MagicCard):
 │              │              │              │              │
 │ Diagnóstico  │ Arquitetura  │ Execução     │ Operação     │
 │              │              │              │              │
-│ Mapeamento   │ Desenho      │ Desenvolvimento│ Implantação │
-│ completo...  │ técnico...   │ iterativo...   │ assistida..│
+│ Imersão na   │ Projeto      │ Desenvolvimento│ Implantação │
+│ operação...  │ técnico...   │ em ciclos...   │ assistida..│
 └──────────────┴──────────────┴──────────────┴──────────────┘
 
 Mobile (timeline vertical):
   ●─── 01 Diagnóstico
-  │    Mapeamento completo...
+  │    Imersão na operação...
   │
   ●─── 02 Arquitetura
-  │    Desenho técnico...
+  │    Projeto técnico...
   │
   ●─── 03 Execução
-  │    Desenvolvimento iterativo...
+  │    Desenvolvimento em ciclos...
   │
   ●─── 04 Operação
        Implantação assistida...
@@ -331,37 +333,38 @@ Mobile (timeline vertical):
 **Titulo:** Nosso *compromisso*
 
 **Descricao:**
-> Trabalhamos com **transparência absoluta** e responsabilidade técnica. Cada decisão é documentada, cada entrega é mensurável.
+> Quando uma empresa confia a operação a um parceiro externo, precisa ter **garantias concretas** — não discurso. É assim que trabalhamos.
 
 | Codigo | Principio | Descricao |
 |--------|-----------|-----------|
-| PRC-01 | Sem dependência tecnológica | Você mantém controle total sobre seus sistemas e dados. |
-| PRC-02 | Documentação completa | Cada projeto entregue com manuais técnicos e operacionais. |
-| PRC-03 | Resultados mensuráveis | KPIs definidos no início, acompanhados até o final. |
-| PRC-04 | Suporte contínuo | Acompanhamento pós-implantação com ajustes e otimizações. |
+| PRC-01 | Independência total | Sua operação nunca fica refém da HCT. Sistemas, dados e código são seus — sempre. |
+| PRC-02 | Documentação técnica completa | Cada projeto é entregue com documentação que permite a qualquer equipe técnica dar continuidade. |
+| PRC-03 | Resultados com prazo | KPIs definidos antes da execução, acompanhados em tempo real e reportados até a estabilização. |
+| PRC-04 | Sustentação ativa | Pós-implantação com monitoramento contínuo, correções proativas e ciclos de evolução. |
 
 **Citacao:**
-> Não vendemos promessas. **Entregamos infraestrutura** que funciona, escala e *gera valor* desde o primeiro dia.
+> Não apresentamos promessas. **Apresentamos escopo, prazo e resultado** — e entregamos os três.
 
 ### Visual
 ```
 ┌─────────────────────────────────┬───────────────────────────────┐
 │  [SYS:COMMITMENT]               │  ┌───────────────────────────┐│
 │                                  │  │ ● PRC-01                 ││
-│  Nosso compromisso               │  │   Sem dependência tecn.  ││
+│  Nosso compromisso               │  │   Independência total    ││
 │                                  │  ├───────────────────────────┤│
-│  Trabalhamos com transparência   │  │ ● PRC-02                 ││
-│  absoluta e responsabilidade...  │  │   Documentação completa  ││
-│                                  │  ├───────────────────────────┤│
-│                                  │  │ ● PRC-03                 ││
-│                                  │  │   Resultados mensuráveis ││
+│  Quando uma empresa confia       │  │ ● PRC-02                 ││
+│  a operação a um parceiro        │  │   Documentação completa  ││
+│  externo, precisa ter            │  ├───────────────────────────┤│
+│  garantias concretas...          │  │ ● PRC-03                 ││
+│                                  │  │   Resultados com prazo   ││
 │                                  │  ├───────────────────────────┤│
 │                                  │  │ ● PRC-04                 ││
-│                                  │  │   Suporte contínuo       ││
+│                                  │  │   Sustentação ativa      ││
 │                                  │  └───────────────────────────┘│
 │                                                                   │
 │  ┌───────────────────────────────────────────────────────────┐   │
-│  │ "Não vendemos promessas. Entregamos infraestrutura..."    │   │
+│  │ "Não apresentamos promessas. Apresentamos escopo,         │   │
+│  │  prazo e resultado — e entregamos os três."               │   │
 │  └───────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -426,9 +429,9 @@ Mobile (scroll horizontal por categoria):
 
 | Codigo | Titulo | Tag |
 |--------|--------|-----|
-| ART-01 | Por que as empresas precisam de IA agente agora | AGENTIC AI |
-| ART-02 | O impacto real da automação no desempenho financeiro | FINANCE |
-| ART-03 | Como CEOs tomam decisões tecnológicas | STRATEGY |
+| ART-01 | Por que IA agente é a próxima camada da automação corporativa | AGENTIC AI |
+| ART-02 | O retorno financeiro real da automação em operações de escala | FINANCE |
+| ART-03 | O que lideranças precisam saber antes de decidir sobre tecnologia | STRATEGY |
 | ART-04 | A corrida trilionária da IA nos próximos 5 anos | MARKET |
 
 **CTA em cada card:** LER →
@@ -438,15 +441,17 @@ Mobile (scroll horizontal por categoria):
 ┌────────────────────────────────┬────────────────────────────────┐
 │ ART-01            AGENTIC AI   │ ART-02               FINANCE   │
 │                                │                                │
-│ Por que as empresas precisam   │ O impacto real da automação    │
-│ de IA agente agora             │ no desempenho financeiro       │
+│ Por que IA agente é a próxima  │ O retorno financeiro real da   │
+│ camada da automação            │ automação em operações         │
+│ corporativa                    │ de escala                      │
 │                                │                                │
 │ ● LER →                       │ ● LER →                        │
 ├────────────────────────────────┼────────────────────────────────┤
 │ ART-03             STRATEGY    │ ART-04                MARKET   │
 │                                │                                │
-│ Como CEOs tomam decisões       │ A corrida trilionária da IA    │
-│ tecnológicas                   │ nos próximos 5 anos            │
+│ O que lideranças precisam      │ A corrida trilionária da IA    │
+│ saber antes de decidir         │ nos próximos 5 anos            │
+│ sobre tecnologia               │                                │
 │                                │                                │
 │ ● LER →                       │ ● LER →                        │
 └────────────────────────────────┴────────────────────────────────┘
@@ -461,10 +466,10 @@ Mobile (scroll horizontal por categoria):
 
 **Tag:** `[SYS:CONTACT]`
 
-**Titulo:** Vamos **construir** algo *juntos*.
+**Titulo:** Pronto para **reestruturar** sua *operação*?
 
 **Descricao:**
-> Entre em contato para discutir como podemos **transformar seus processos** com automação inteligente.
+> Fale com a nossa equipe. O primeiro passo é um **diagnóstico técnico** para entender onde sua empresa está — e até onde ela pode chegar.
 
 | Campo | Valor |
 |-------|-------|
@@ -477,12 +482,12 @@ Mobile (scroll horizontal por categoria):
 ┌─────────────────────────────────┬───────────────────────────────┐
 │  [SYS:CONTACT]                  │  ┌───────────────────────────┐│
 │                                  │  │ EMAIL   contato@human... ●││
-│  Vamos construir                 │  ├───────────────────────────┤│
-│  algo juntos.                    │  │ LOCAL   Brasília, DF     ○││
+│  Pronto para reestruturar        │  ├───────────────────────────┤│
+│  sua operação?                   │  │ LOCAL   Brasília, DF     ○││
 │                                  │  ├───────────────────────────┤│
-│  Entre em contato para           │  │ STATUS  DISPONÍVEL       ●││
-│  discutir como podemos...        │  └───────────────────────────┘│
-│                                  │    ↑ ShineBorder azul animado │
+│  Fale com a nossa equipe.        │  │ STATUS  DISPONÍVEL       ●││
+│  O primeiro passo é um           │  └───────────────────────────┘│
+│  diagnóstico técnico...          │    ↑ ShineBorder azul animado │
 └─────────────────────────────────┴───────────────────────────────┘
 ```
 - **Fundo:** branco (#fff)
@@ -528,7 +533,7 @@ Mobile (scroll horizontal por categoria):
 | Tipo | Uso |
 |------|-----|
 | Inter (sans-serif) | Corpo, titulos, navegacao |
-| Fraunces (serif, italico) | Palavras de destaque (*sob medida*, *falam*, *juntos*) |
+| Fraunces (serif, italico) | Palavras de destaque (*não foi feita*, *acelera*, *operação*) |
 | Monospace | Codigos, tags [SYS:], labels, terminal |
 
 ## EFEITOS MAGIC UI
