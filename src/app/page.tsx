@@ -4,10 +4,13 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
+import Link from "next/link";
+
 // Imported components
 import { Header, ScrollProgressLine } from "@/components/layout";
 import { LiquidGlassFilter, BlinkReveal, LineReveal, FlipText, TriggeredRevealText, MagicCard, BorderBeam, ShineBorder } from "@/components/ui";
 import { ImageCarousel } from "@/components/sections";
+import { articlesData } from "@/data/articles";
 import { ACCENT_BLUE, containerStyle, heroContainerStyle, servicesData, techData, heroGridData, GridCellData } from "@/data";
 import { useIsMobile } from "@/hooks";
 
@@ -142,11 +145,13 @@ function ArticleCard({
   code,
   title,
   tag,
+  slug,
   index,
 }: {
   code: string;
   title: string;
   tag: string;
+  slug: string;
   index: number;
 }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -173,83 +178,85 @@ function ArticleCard({
   };
 
   return (
-    <motion.article
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      animate={{ backgroundColor: getBackgroundColor() }}
-      transition={{ duration: 0.1 }}
-      style={{
-        padding: "28px",
-        borderBottom: "1px solid #1a1a1a",
-        borderRight: "1px solid #1a1a1a",
-        cursor: "pointer",
-        backgroundColor: "#000",
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-        <motion.span
-          animate={{
-            color: isHovered ? ACCENT_BLUE : initPhase === 1 ? ACCENT_BLUE : initPhase >= 2 ? "#fff" : "#222",
-          }}
-          transition={{ duration: 0.1 }}
-          style={{
-            fontFamily: "monospace",
-            fontSize: "10px",
-          }}
-        >
-          {code}
-        </motion.span>
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: initPhase >= 2 ? 1 : 0 }}
-          transition={{ duration: 0.2 }}
-          style={{ fontFamily: "monospace", fontSize: "9px", color: "#777", padding: "4px 8px", border: "1px solid #1a1a1a" }}
-        >
-          {tag}
-        </motion.span>
-      </div>
-      <motion.h3
-        initial={{ opacity: 0 }}
-        animate={{ opacity: initPhase >= 2 ? 1 : 0 }}
-        transition={{ duration: 0.2 }}
+    <Link href={`/artigos/${slug}`} style={{ textDecoration: "none", display: "block" }}>
+      <motion.article
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        animate={{ backgroundColor: getBackgroundColor() }}
+        transition={{ duration: 0.1 }}
         style={{
-          fontSize: "15px",
-          fontWeight: 500,
-          marginBottom: "16px",
-          color: "#f5f0e8",
-          lineHeight: 1.4,
+          padding: "28px",
+          borderBottom: "1px solid #1a1a1a",
+          borderRight: "1px solid #1a1a1a",
+          cursor: "pointer",
+          backgroundColor: "#000",
         }}
       >
-        {title}
-      </motion.h3>
-      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-        <motion.div
-          animate={{
-            opacity: initPhase === 0 ? 0 : isHovered ? 1 : initPhase === 3 ? [0.3, 1, 0.3] : 1,
-            backgroundColor: isHovered ? ACCENT_BLUE : initPhase === 1 ? ACCENT_BLUE : "#fff",
-          }}
-          transition={{
-            opacity: initPhase === 3 && !isHovered
-              ? { duration: 2, repeat: Infinity, delay: index * 0.2 }
-              : { duration: 0.1 },
-            backgroundColor: { duration: 0.1 },
-          }}
-          style={{ width: "5px", height: "5px" }}
-        />
-        <motion.span
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
+          <motion.span
+            animate={{
+              color: isHovered ? ACCENT_BLUE : initPhase === 1 ? ACCENT_BLUE : initPhase >= 2 ? "#fff" : "#222",
+            }}
+            transition={{ duration: 0.1 }}
+            style={{
+              fontFamily: "monospace",
+              fontSize: "10px",
+            }}
+          >
+            {code}
+          </motion.span>
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: initPhase >= 2 ? 1 : 0 }}
+            transition={{ duration: 0.2 }}
+            style={{ fontFamily: "monospace", fontSize: "9px", color: "#777", padding: "4px 8px", border: "1px solid #1a1a1a" }}
+          >
+            {tag}
+          </motion.span>
+        </div>
+        <motion.h3
           initial={{ opacity: 0 }}
           animate={{ opacity: initPhase >= 2 ? 1 : 0 }}
           transition={{ duration: 0.2 }}
           style={{
-            fontFamily: "monospace",
-            fontSize: "11px",
-            color: isHovered ? ACCENT_BLUE : "#fff",
+            fontSize: "15px",
+            fontWeight: 500,
+            marginBottom: "16px",
+            color: "#f5f0e8",
+            lineHeight: 1.4,
           }}
         >
-          LER →
-        </motion.span>
-      </div>
-    </motion.article>
+          {title}
+        </motion.h3>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <motion.div
+            animate={{
+              opacity: initPhase === 0 ? 0 : isHovered ? 1 : initPhase === 3 ? [0.3, 1, 0.3] : 1,
+              backgroundColor: isHovered ? ACCENT_BLUE : initPhase === 1 ? ACCENT_BLUE : "#fff",
+            }}
+            transition={{
+              opacity: initPhase === 3 && !isHovered
+                ? { duration: 2, repeat: Infinity, delay: index * 0.2 }
+                : { duration: 0.1 },
+              backgroundColor: { duration: 0.1 },
+            }}
+            style={{ width: "5px", height: "5px" }}
+          />
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: initPhase >= 2 ? 1 : 0 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              fontFamily: "monospace",
+              fontSize: "11px",
+              color: isHovered ? ACCENT_BLUE : "#fff",
+            }}
+          >
+            LER →
+          </motion.span>
+        </div>
+      </motion.article>
+    </Link>
   );
 }
 
@@ -3747,20 +3754,51 @@ export default function Home() {
               borderBottom: "none",
             }}
           >
-            {[
-              { code: "ART-01", title: "Por que IA agente é a próxima camada da automação corporativa", tag: "AGENTIC AI" },
-              { code: "ART-02", title: "O retorno financeiro real da automação em operações de escala", tag: "FINANCE" },
-              { code: "ART-03", title: "O que lideranças precisam saber antes de decidir sobre tecnologia", tag: "STRATEGY" },
-              { code: "ART-04", title: "A corrida trilionária da IA nos próximos 5 anos", tag: "MARKET" },
-            ].map((article, index) => (
+            {articlesData.slice(0, 4).map((article, index) => (
               <ArticleCard
                 key={article.code}
                 code={article.code}
                 title={article.title}
                 tag={article.tag}
+                slug={article.slug}
                 index={index}
               />
             ))}
+          </motion.div>
+
+          {/* Ver todos button */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            style={{ marginTop: "32px", textAlign: "center" }}
+          >
+            <Link
+              href="/artigos"
+              style={{
+                fontFamily: "monospace",
+                fontSize: "12px",
+                color: "#555",
+                textDecoration: "none",
+                padding: "12px 28px",
+                border: "1px solid #282828",
+                borderRadius: "6px",
+                transition: "all 0.3s",
+                display: "inline-block",
+                letterSpacing: "1px",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = ACCENT_BLUE;
+                e.currentTarget.style.color = "#fff";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "#282828";
+                e.currentTarget.style.color = "#555";
+              }}
+            >
+              VER TODOS →
+            </Link>
           </motion.div>
         </div>
       </section>

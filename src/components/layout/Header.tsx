@@ -2,12 +2,13 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { LiquidGlassFilter } from "../ui/LiquidGlassFilter";
 
 const NAV_LINKS = [
   { href: "#quem-somos", label: "ABOUT" },
   { href: "#servicos", label: "SERVICES" },
-  { href: "#artigos", label: "ARTICLES" },
+  { href: "/artigos", label: "ARTICLES" },
   { href: "#contato", label: "CONTACT" },
 ];
 
@@ -82,9 +83,11 @@ function MenuIcon({ isOpen, onClick }: { isOpen: boolean; onClick: () => void })
 function MobileMenu({
   isOpen,
   onClose,
+  onNavClick,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  onNavClick: (href: string) => void;
 }) {
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -149,8 +152,7 @@ function MobileMenu({
                 onClick={(e) => {
                   e.preventDefault();
                   onClose();
-                  const id = link.href.replace("#", "");
-                  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+                  onNavClick(link.href);
                 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -225,6 +227,22 @@ export function Header() {
   const [showLinks, setShowLinks] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+  const isHome = pathname === "/";
+
+  const handleNavClick = (href: string) => {
+    if (href.startsWith("/")) {
+      router.push(href);
+      return;
+    }
+    const id = href.replace("#", "");
+    if (isHome) {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      router.push(`/${href}`);
+    }
+  };
 
   // Detect mobile viewport
   useEffect(() => {
@@ -266,7 +284,7 @@ export function Header() {
   return (
     <>
       <LiquidGlassFilter />
-      <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} onNavClick={handleNavClick} />
 
       <header
         style={{
@@ -424,8 +442,7 @@ export function Header() {
                   href={link.href}
                   onClick={(e) => {
                     e.preventDefault();
-                    const id = link.href.replace("#", "");
-                    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+                    handleNavClick(link.href);
                   }}
                   animate={{
                     opacity: showLinks ? 1 : 0,
