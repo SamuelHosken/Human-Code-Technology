@@ -84,10 +84,12 @@ function MobileMenu({
   isOpen,
   onClose,
   onNavClick,
+  resolveHref,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  onNavClick: (href: string) => void;
+  onNavClick: (href: string, e: React.MouseEvent) => void;
+  resolveHref: (href: string) => string;
 }) {
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -112,7 +114,7 @@ function MobileMenu({
           style={{
             position: "fixed",
             inset: 0,
-            zIndex: 40,
+            zIndex: 55,
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -133,6 +135,7 @@ function MobileMenu({
                 linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
               `,
               backgroundSize: "40px 40px",
+              pointerEvents: "none",
             }}
           />
 
@@ -148,11 +151,10 @@ function MobileMenu({
             {NAV_LINKS.map((link, index) => (
               <motion.a
                 key={link.href}
-                href={link.href}
+                href={resolveHref(link.href)}
                 onClick={(e) => {
-                  e.preventDefault();
                   onClose();
-                  onNavClick(link.href);
+                  onNavClick(link.href, e);
                 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -231,17 +233,21 @@ export function Header() {
   const router = useRouter();
   const isHome = pathname === "/";
 
-  const handleNavClick = (href: string) => {
-    if (href.startsWith("/")) {
-      router.push(href);
-      return;
-    }
-    const id = href.replace("#", "");
-    if (isHome) {
+  // Resolves href based on current page: on home, #section stays; off home, becomes /#section
+  const resolveHref = (href: string) => {
+    if (href.startsWith("/")) return href;
+    if (isHome) return href;
+    return `/${href}`;
+  };
+
+  const handleNavClick = (href: string, e: React.MouseEvent) => {
+    // Only intercept for smooth scroll on home page hash links
+    if (!href.startsWith("/") && isHome) {
+      e.preventDefault();
+      const id = href.replace("#", "");
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      router.push(`/${href}`);
     }
+    // All other cases: let the native <a href> handle navigation
   };
 
   // Detect mobile viewport
@@ -284,7 +290,7 @@ export function Header() {
   return (
     <>
       <LiquidGlassFilter />
-      <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} onNavClick={handleNavClick} />
+      <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} onNavClick={handleNavClick} resolveHref={resolveHref} />
 
       <header
         style={{
@@ -292,7 +298,7 @@ export function Header() {
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 50,
+          zIndex: menuOpen ? 60 : 50,
           display: "flex",
           justifyContent: "center",
           padding: isMobile ? "12px 16px" : "16px 24px",
@@ -439,11 +445,8 @@ export function Header() {
               {NAV_LINKS.map((link, index) => (
                 <motion.a
                   key={link.href}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(link.href);
-                  }}
+                  href={resolveHref(link.href)}
+                  onClick={(e) => handleNavClick(link.href, e)}
                   animate={{
                     opacity: showLinks ? 1 : 0,
                   }}

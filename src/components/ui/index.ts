@@ -3,3 +3,4 @@ export * from './RevealText';
 export * from './MagicCard';
 export * from './BorderBeam';
 export * from './ShineBorder';
+export * from './TextReveal';

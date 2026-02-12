@@ -8,7 +8,7 @@ import Link from "next/link";
 
 // Imported components
 import { Header, ScrollProgressLine } from "@/components/layout";
-import { LiquidGlassFilter, BlinkReveal, LineReveal, FlipText, TriggeredRevealText, MagicCard, BorderBeam, ShineBorder } from "@/components/ui";
+import { LiquidGlassFilter, BlinkReveal, LineReveal, FlipText, TriggeredRevealText, MagicCard, BorderBeam, ShineBorder, TextReveal } from "@/components/ui";
 import { ImageCarousel } from "@/components/sections";
 import { articlesData } from "@/data/articles";
 import { ACCENT_BLUE, containerStyle, heroContainerStyle, servicesData, techData, heroGridData, GridCellData } from "@/data";
@@ -651,94 +651,178 @@ function ServicesSection() {
   );
 }
 
-// Mobile Services Section - Horizontal Swipeable Carousel
+// Mobile Services Section - Scroll-Pinned Sticky Cards
 function MobileServicesSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
 
-  // Handle scroll to update current index
-  const handleScroll = () => {
-    if (!containerRef.current) return;
-    const scrollLeft = containerRef.current.scrollLeft;
-    const cardWidth = containerRef.current.offsetWidth;
-    const newIndex = Math.round(scrollLeft / cardWidth);
-    if (newIndex !== currentIndex && newIndex >= 0 && newIndex < servicesData.length) {
-      setCurrentIndex(newIndex);
-    }
-  };
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (v) => {
+      const progress = Math.max(0, Math.min(1, v));
+      const index = Math.min(
+        Math.floor(progress * servicesData.length),
+        servicesData.length - 1
+      );
+      if (index !== currentIndex && index >= 0) {
+        setCurrentIndex(index);
+      }
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress, currentIndex]);
+
+  const currentService = servicesData[currentIndex];
 
   return (
     <section
       id="servicos"
+      ref={sectionRef}
       style={{
         backgroundColor: "#000",
-        padding: "60px 0",
+        position: "relative",
+        height: `${servicesData.length * 55}vh`,
       }}
     >
-      {/* Header */}
-      <div style={{ padding: "0 16px", marginBottom: "24px" }}>
-        <span
-          style={{
-            display: "inline-block",
-            fontFamily: "monospace",
-            fontSize: "10px",
-            fontWeight: 500,
-            color: "#fff",
-            textTransform: "uppercase",
-            letterSpacing: "2px",
-            marginBottom: "12px",
-          }}
-        >
-          [SYS:SERVICES]
-        </span>
-        <h2
-          style={{
-            fontSize: "24px",
-            fontWeight: 300,
-            lineHeight: 1.2,
-          }}
-        >
-          Nossas <span style={{ fontWeight: 500 }}>frentes</span> de{" "}
-          <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic" }}>
-            atuação
-          </span>
-        </h2>
+      {/* Background scrolling service codes */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+          padding: "10vh 0",
+        }}
+      >
+        {servicesData.map((service) => (
+          <div
+            key={service.code}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              opacity: 0.1,
+              padding: "20px",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "monospace",
+                fontSize: "clamp(48px, 18vw, 100px)",
+                fontWeight: 300,
+                color: "#fff",
+                letterSpacing: "-2px",
+              }}
+            >
+              {service.code}
+            </span>
+          </div>
+        ))}
       </div>
 
-      {/* Horizontal Carousel */}
+      {/* Sticky Card Container */}
       <div
-        ref={containerRef}
-        onScroll={handleScroll}
         style={{
-          display: "flex",
-          overflowX: "auto",
-          scrollSnapType: "x mandatory",
-          WebkitOverflowScrolling: "touch",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          gap: "12px",
+          position: "sticky",
+          top: "50%",
+          transform: "translateY(-50%)",
+          zIndex: 10,
           padding: "0 16px",
         }}
       >
-        {servicesData.map((service, index) => (
-          <motion.div
-            key={service.code}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
+        {/* Header */}
+        <div style={{ marginBottom: "16px" }}>
+          <span
             style={{
-              flex: "0 0 calc(100% - 32px)",
-              scrollSnapAlign: "center",
-              padding: "24px",
-              backgroundColor: "rgba(255,255,255,0.03)",
-              border: "1px solid #1a1a1a",
-              borderRadius: "16px",
+              display: "inline-block",
+              fontFamily: "monospace",
+              fontSize: "10px",
+              fontWeight: 500,
+              color: "#fff",
+              textTransform: "uppercase",
+              letterSpacing: "2px",
+              marginBottom: "8px",
             }}
           >
+            [SYS:SERVICES]
+          </span>
+          <h2
+            style={{
+              fontSize: "22px",
+              fontWeight: 300,
+              lineHeight: 1.2,
+            }}
+          >
+            Nossas <span style={{ fontWeight: 500 }}>frentes</span> de{" "}
+            <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic" }}>
+              atuação
+            </span>
+          </h2>
+        </div>
+
+        {/* Glass Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          style={{
+            position: "relative",
+            padding: "24px",
+            borderRadius: "16px",
+            overflow: "hidden",
+            minHeight: "180px",
+          }}
+        >
+          {/* Glass background */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 0,
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+              overflow: "hidden",
+              borderRadius: "16px",
+            }}
+          />
+          {/* Tint */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 1,
+              background: "rgba(0, 0, 0, 0.6)",
+              borderRadius: "16px",
+            }}
+          />
+          {/* Shine */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 2,
+              overflow: "hidden",
+              borderRadius: "16px",
+              boxShadow:
+                "inset 1px 1px 1px 0 rgba(255, 255, 255, 0.12), inset -1px -1px 1px 0 rgba(255, 255, 255, 0.05)",
+            }}
+          />
+
+          {/* Content */}
+          <div style={{ position: "relative", zIndex: 3 }}>
             {/* Service Code */}
             <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
-              <span
+              <motion.span
+                key={currentService.code}
+                initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.35 }}
                 style={{
                   fontFamily: "monospace",
                   fontSize: "11px",
@@ -747,66 +831,75 @@ function MobileServicesSection() {
                   letterSpacing: "1px",
                 }}
               >
-                {service.code}
-              </span>
-              <div
+                {currentService.code}
+              </motion.span>
+              <motion.div
+                animate={{ opacity: [0.4, 1, 0.4] }}
+                transition={{ duration: 2, repeat: Infinity }}
                 style={{
-                  width: "4px",
-                  height: "4px",
+                  width: "5px",
+                  height: "5px",
                   backgroundColor: ACCENT_BLUE,
                 }}
               />
             </div>
 
             {/* Service Title */}
-            <h3
+            <motion.h3
+              key={`title-${currentIndex}`}
+              initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
               style={{
-                fontSize: "18px",
+                fontSize: "20px",
                 fontWeight: 500,
-                marginBottom: "8px",
+                marginBottom: "10px",
                 color: "#fff",
               }}
             >
-              {service.title}
-            </h3>
+              {currentService.title}
+            </motion.h3>
 
             {/* Service Description */}
-            <p
+            <motion.p
+              key={`desc-${currentIndex}`}
+              initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.45, delay: 0.06, ease: [0.25, 0.1, 0.25, 1] }}
               style={{
                 fontSize: "14px",
-                lineHeight: 1.6,
+                lineHeight: 1.7,
                 color: "rgba(255,255,255,0.6)",
               }}
             >
-              {service.description}
-            </p>
-          </motion.div>
-        ))}
-      </div>
+              {currentService.description}
+            </motion.p>
 
-      {/* Progress Dots */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "6px",
-          marginTop: "20px",
-        }}
-      >
-        {servicesData.map((_, i) => (
-          <motion.div
-            key={i}
-            animate={{
-              backgroundColor: i === currentIndex ? ACCENT_BLUE : "rgba(255,255,255,0.15)",
-              width: i === currentIndex ? "20px" : "6px",
-            }}
-            transition={{ duration: 0.3 }}
-            style={{
-              height: "4px",
-              borderRadius: "2px",
-            }}
-          />
-        ))}
+            {/* Progress Dots */}
+            <div
+              style={{
+                display: "flex",
+                gap: "5px",
+                marginTop: "20px",
+              }}
+            >
+              {servicesData.map((_, i) => (
+                <motion.div
+                  key={i}
+                  animate={{
+                    backgroundColor: i === currentIndex ? ACCENT_BLUE : "rgba(255,255,255,0.15)",
+                    width: i === currentIndex ? "20px" : "5px",
+                  }}
+                  transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                  style={{
+                    height: "3px",
+                    borderRadius: "2px",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -1128,333 +1221,116 @@ function HeroGrid() {
   );
 }
 
-// Mobile Hero Section - Redesigned for impact
+// Mobile Hero Section - Grid layout matching desktop
 function MobileHeroSection() {
-  const [phase, setPhase] = useState(0);
-
-  useEffect(() => {
-    // Staggered reveal phases
-    const timers = [
-      setTimeout(() => setPhase(1), 200),   // Status indicator
-      setTimeout(() => setPhase(2), 500),   // Title line 1
-      setTimeout(() => setPhase(3), 700),   // Title line 2
-      setTimeout(() => setPhase(4), 900),   // Title line 3
-      setTimeout(() => setPhase(5), 1100),  // Description
-      setTimeout(() => setPhase(6), 1400),  // CTA
-      setTimeout(() => setPhase(7), 1700),  // Decorative elements
-    ];
-    return () => timers.forEach(clearTimeout);
-  }, []);
-
   return (
     <section
       id="home"
       style={{
         position: "relative",
-        minHeight: "100svh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        padding: "80px 20px 40px",
+        paddingTop: "100px",
+        paddingBottom: "40px",
         overflow: "hidden",
         backgroundColor: "#000",
       }}
     >
-      {/* Background decorative grid lines */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          opacity: 0.03,
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)
-          `,
-          backgroundSize: "60px 60px",
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Floating code snippets - decorative */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: phase >= 7 ? 0.08 : 0 }}
-        transition={{ duration: 1 }}
-        style={{
-          position: "absolute",
-          top: "15%",
-          right: "5%",
-          fontFamily: "monospace",
-          fontSize: "8px",
-          color: "#fff",
-          transform: "rotate(12deg)",
-        }}
-      >
-        {"<init/>"}
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: phase >= 7 ? 0.06 : 0 }}
-        transition={{ duration: 1, delay: 0.2 }}
-        style={{
-          position: "absolute",
-          bottom: "25%",
-          left: "8%",
-          fontFamily: "monospace",
-          fontSize: "8px",
-          color: ACCENT_BLUE,
-          transform: "rotate(-8deg)",
-        }}
-      >
-        {"0x7F"}
-      </motion.div>
-
-      {/* Main content */}
-      <div style={{ position: "relative", zIndex: 1 }}>
-        {/* Status indicator - larger and centered */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{
-            opacity: phase >= 1 ? 1 : 0,
-            scale: phase >= 1 ? 1 : 0.8
-          }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "12px",
-            marginBottom: "40px",
-          }}
-        >
-          <motion.div
-            animate={{
-              opacity: phase >= 1 ? [0.4, 1, 0.4] : 0,
-              boxShadow: phase >= 1 ? [
-                `0 0 10px ${ACCENT_BLUE}`,
-                `0 0 25px ${ACCENT_BLUE}`,
-                `0 0 10px ${ACCENT_BLUE}`
-              ] : "none"
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-            style={{
-              width: "10px",
-              height: "10px",
-              backgroundColor: ACCENT_BLUE,
-              borderRadius: "50%",
-            }}
-          />
-          <span
-            style={{
-              fontFamily: "monospace",
-              fontSize: "11px",
-              color: "#666",
-              letterSpacing: "3px",
-              textTransform: "uppercase",
-            }}
-          >
-            SYSTEM ONLINE
-          </span>
-          <motion.div
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ duration: 1, repeat: Infinity }}
-            style={{
-              fontFamily: "monospace",
-              fontSize: "11px",
-              color: "#fff",
-            }}
-          >
-            _
-          </motion.div>
-        </motion.div>
-
-        {/* Title - dramatic reveal */}
-        <div style={{ marginBottom: "32px" }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: phase >= 2 ? 1 : 0, y: phase >= 2 ? 0 : 20 }}
-            transition={{ duration: 0.5 }}
-            style={{
-              fontSize: "32px",
-              fontWeight: 300,
-              lineHeight: 1.2,
-              marginBottom: "8px",
-            }}
-          >
-            <span style={{ fontWeight: 500 }}>Sua operação</span>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: phase >= 3 ? 1 : 0, y: phase >= 3 ? 0 : 20 }}
-            transition={{ duration: 0.5 }}
-            style={{
-              fontSize: "32px",
-              fontWeight: 300,
-              lineHeight: 1.2,
-              marginBottom: "8px",
-            }}
-          >
+      <div style={{ padding: "0 16px" }}>
+        {/* Badge */}
+        <BlinkReveal delay={200}>
+          <div style={{ marginBottom: "20px" }}>
             <span
               style={{
-                fontFamily: "var(--font-fraunces), Georgia, serif",
-                fontStyle: "italic",
-                color: "#fff",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "6px 12px",
+                border: "1px solid #1a1a1a",
+                fontSize: "10px",
+                fontFamily: "monospace",
+                color: "#888",
+                textTransform: "uppercase",
+                letterSpacing: "1px",
               }}
             >
-              não foi feita
+              <motion.span
+                animate={{ opacity: [0.4, 1, 0.4] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                style={{
+                  width: "6px",
+                  height: "6px",
+                  backgroundColor: "#fff",
+                }}
+              />
+              SYS:ACTIVE
             </span>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: phase >= 4 ? 1 : 0, y: phase >= 4 ? 0 : 20 }}
-            transition={{ duration: 0.5 }}
-            style={{
-              fontSize: "32px",
-              fontWeight: 500,
-              lineHeight: 1.2,
-            }}
-          >
-            para depender de{" "}
-            <span style={{ color: ACCENT_BLUE }}>processos manuais.</span>
-          </motion.div>
-        </div>
+          </div>
+        </BlinkReveal>
+
+        {/* Title */}
+        <h1
+          style={{
+            fontSize: "28px",
+            fontWeight: 300,
+            lineHeight: 1.15,
+            marginBottom: "20px",
+          }}
+        >
+          <LineReveal delay={350}>
+            <span style={{ fontWeight: 500 }}>Sua operação</span>
+          </LineReveal>{" "}
+          <LineReveal delay={450}>
+            <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontStyle: "italic" }}>não foi feita</span>
+          </LineReveal>{" "}
+          <LineReveal delay={550}>
+            <span style={{ fontWeight: 300 }}>para depender de</span>
+          </LineReveal>{" "}
+          <LineReveal delay={650}>
+            <span style={{ fontWeight: 500 }}>processos manuais.</span>
+          </LineReveal>
+        </h1>
 
         {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: phase >= 5 ? 1 : 0, y: phase >= 5 ? 0 : 15 }}
-          transition={{ duration: 0.6 }}
+        <div
           style={{
-            fontSize: "15px",
-            lineHeight: 1.8,
+            fontSize: "14px",
+            lineHeight: 1.7,
             color: "#888",
-            marginBottom: "40px",
-            maxWidth: "320px",
+            fontWeight: 300,
+            marginBottom: "28px",
           }}
         >
-          Somos a <span style={{ color: "#ccc", fontWeight: 400 }}>engenharia por trás da automação</span> que grandes empresas precisam para <span style={{ color: "#ccc", fontWeight: 400 }}>operar no ritmo do mercado</span>.
-        </motion.p>
+          <BlinkReveal delay={500}>
+            <span style={{ display: "block" }}>Somos a <span style={{ color: "#ccc", fontWeight: 400 }}>engenharia por trás da automação</span> que grandes</span>
+          </BlinkReveal>
+          <BlinkReveal delay={600}>
+            <span style={{ display: "block" }}>empresas precisam para <span style={{ color: "#ccc", fontWeight: 400 }}>operar no ritmo do mercado</span>.</span>
+          </BlinkReveal>
+        </div>
 
-        {/* CTA Button */}
-        <motion.a
-          href="#servicos"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: phase >= 6 ? 1 : 0, y: phase >= 6 ? 0 : 20 }}
-          transition={{ duration: 0.5 }}
-          whileTap={{ scale: 0.98 }}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "12px",
-            padding: "16px 28px",
-            backgroundColor: "#fff",
-            color: "#000",
-            fontFamily: "monospace",
-            fontSize: "12px",
-            fontWeight: 500,
-            textDecoration: "none",
-            letterSpacing: "1px",
-            textTransform: "uppercase",
-          }}
-        >
-          <span>Conheça nossos serviços</span>
-          <motion.span
-            animate={{ x: [0, 4, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            →
-          </motion.span>
-        </motion.a>
-
-        {/* Terminal-style info box */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: phase >= 7 ? 1 : 0 }}
-          transition={{ duration: 0.8 }}
-          style={{
-            marginTop: "48px",
-            padding: "16px",
-            border: "1px solid #1a1a1a",
-            backgroundColor: "rgba(0,0,0,0.5)",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
-            <div style={{ width: "6px", height: "6px", backgroundColor: "#333" }} />
-            <span style={{ fontFamily: "monospace", fontSize: "9px", color: "#444", letterSpacing: "2px" }}>
-              STATUS
-            </span>
-          </div>
-          <div style={{ fontFamily: "monospace", fontSize: "11px", color: "#555", lineHeight: 1.8 }}>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "#666" }}>&gt; clientes_ativos</span>
-              <span style={{ color: "#888" }}>OK</span>
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "#666" }}>&gt; projetos_2024</span>
-              <span style={{ color: "#888" }}>12+</span>
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "#666" }}>&gt; disponibilidade</span>
-              <motion.span
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                style={{ color: ACCENT_BLUE }}
-              >
-                OPEN
-              </motion.span>
-            </div>
-          </div>
-        </motion.div>
+        {/* Grid */}
+        <MobileHeroGrid />
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: phase >= 7 ? 1 : 0 }}
-        transition={{ duration: 1 }}
-        style={{
-          position: "absolute",
-          bottom: "24px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "8px",
-        }}
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0], opacity: [0.3, 0.7, 0.3] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          style={{
-            width: "1px",
-            height: "24px",
-            backgroundColor: "#333",
-          }}
-        />
-        <span style={{ fontFamily: "monospace", fontSize: "8px", color: "#333", letterSpacing: "2px" }}>
-          SCROLL
-        </span>
-      </motion.div>
     </section>
   );
 }
 
-// Mobile Hero Grid - simplified 2-column version
+// Mobile Hero Grid - 2-column version with full animations like desktop
 function MobileHeroGrid() {
-  const contentCells = 8; // 2 columns x 4 rows
+  const contentCells = 16; // 2 columns x 8 rows
   const columns = 2;
 
-  // Initialize with deterministic values to avoid hydration mismatch
   const [cellIndices, setCellIndices] = useState(() =>
     Array.from({ length: contentCells }, (_, i) => i % heroGridData.length)
   );
 
-  // Randomize and start random cell updates on client
+  const [randomDelays, setRandomDelays] = useState(() =>
+    Array.from({ length: contentCells }, (_, i) => 200 + (i * 25))
+  );
+
   useEffect(() => {
     setCellIndices(Array.from({ length: contentCells }, () => Math.floor(Math.random() * heroGridData.length)));
+    setRandomDelays(Array.from({ length: contentCells }, () => Math.random() * 600 + 200));
 
-    // Update 1 random cell every 800ms
     const interval = setInterval(() => {
       setCellIndices(prev => {
         const newIndices = [...prev];
@@ -1462,12 +1338,21 @@ function MobileHeroGrid() {
         newIndices[cellIndex] = Math.floor(Math.random() * heroGridData.length);
         return newIndices;
       });
-    }, 800);
+    }, 700);
 
     return () => clearInterval(interval);
   }, []);
 
-  const indices = cellIndices;
+  const cellStyle: React.CSSProperties = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "6px",
+    padding: "10px 12px",
+    borderBottom: "1px solid #1a1a1a",
+    borderRight: "1px solid #1a1a1a",
+    backgroundColor: "#000",
+  };
 
   return (
     <div
@@ -1481,49 +1366,28 @@ function MobileHeroGrid() {
         width: "100%",
       }}
     >
-      {indices.map((dataIndex, cellIndex) => {
+      {/* Empty row at top */}
+      {Array.from({ length: columns }).map((_, i) => (
+        <div key={`top-${i}`} style={cellStyle} />
+      ))}
+
+      {/* Content cells */}
+      {cellIndices.map((dataIndex, cellIndex) => {
         const item = heroGridData[dataIndex];
         return (
-          <motion.div
+          <HeroGridCell
             key={cellIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: cellIndex * 0.1 }}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              gap: "8px",
-              padding: "10px 12px",
-              borderBottom: "1px solid #1a1a1a",
-              borderRight: "1px solid #1a1a1a",
-              backgroundColor: "#000",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "monospace",
-                fontSize: "10px",
-                fontWeight: 400,
-                color: "#666",
-              }}
-            >
-              {item.code}
-            </span>
-            <span
-              style={{
-                fontFamily: "monospace",
-                fontSize: "10px",
-                fontWeight: 500,
-                color: "#e5e5e5",
-                textAlign: "right",
-              }}
-            >
-              {item.label}
-            </span>
-          </motion.div>
+            item={item}
+            cellIndex={cellIndex}
+            randomDelay={randomDelays[cellIndex]}
+          />
         );
       })}
+
+      {/* Empty row at bottom */}
+      {Array.from({ length: columns }).map((_, i) => (
+        <div key={`bottom-${i}`} style={cellStyle} />
+      ))}
     </div>
   );
 }
@@ -1741,27 +1605,76 @@ function TechGrid() {
   );
 }
 
-// Mobile Tech Section - Categorized horizontal scrolls
+// Mobile Tech Section - Full Screen Animated Grid
 function MobileTechSection() {
-  const categories = [
-    { id: "ai", name: "IA & Modelos", prefix: "AI", color: ACCENT_BLUE },
-    { id: "ml", name: "Machine Learning", prefix: "ML", color: "#8b5cf6" },
-    { id: "lng", name: "Linguagens", prefix: "LNG", color: "#10b981" },
-    { id: "frm", name: "Frameworks", prefix: "FRM", color: "#f59e0b" },
-    { id: "aut", name: "Automação", prefix: "AUT", color: "#ec4899" },
-    { id: "cld", name: "Cloud & Infra", prefix: "CLD", color: "#06b6d4" },
-    { id: "db", name: "Databases", prefix: "DB", color: "#84cc16" },
-    { id: "api", name: "APIs", prefix: "API", color: "#f97316" },
-  ];
+  const columns = 3;
+  const rows = 16;
+  const gridCells = columns * rows;
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
 
-  const getTechsByCategory = (prefix: string) => {
-    return techData.filter(t => t.code.startsWith(prefix));
-  };
+  const [cellIndices, setCellIndices] = useState(() =>
+    Array.from({ length: gridCells }, (_, i) => i % techData.length)
+  );
+
+  const [revealDelays, setRevealDelays] = useState(() =>
+    Array.from({ length: gridCells }, (_, i) => i * 15)
+  );
+
+  // Randomize on client only after hydration
+  useEffect(() => {
+    setCellIndices(Array.from({ length: gridCells }, () => Math.floor(Math.random() * techData.length)));
+    setRevealDelays(Array.from({ length: gridCells }, () => Math.random() * 1200));
+  }, [gridCells]);
+
+  // Detect when grid comes into view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isInView) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    if (gridRef.current) {
+      observer.observe(gridRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isInView]);
+
+  // Random cell updates - start after reveal animation
+  useEffect(() => {
+    if (!isInView) return;
+
+    let interval: ReturnType<typeof setInterval>;
+
+    const startDelay = setTimeout(() => {
+      interval = setInterval(() => {
+        setCellIndices(prev => {
+          const newIndices = [...prev];
+          const numToUpdate = Math.floor(Math.random() * 3) + 2;
+          for (let i = 0; i < numToUpdate; i++) {
+            const cellIndex = Math.floor(Math.random() * gridCells);
+            newIndices[cellIndex] = Math.floor(Math.random() * techData.length);
+          }
+          return newIndices;
+        });
+      }, 600);
+    }, 1800);
+
+    return () => {
+      clearTimeout(startDelay);
+      if (interval) clearInterval(interval);
+    };
+  }, [isInView, gridCells]);
 
   return (
-    <section style={{ backgroundColor: "#000", padding: "60px 0" }}>
+    <section style={{ backgroundColor: "#000", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       {/* Header */}
-      <div style={{ padding: "0 20px", marginBottom: "32px" }}>
+      <div style={{ padding: "48px 20px 24px", textAlign: "center" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1777,14 +1690,14 @@ function MobileTechSection() {
               color: "#fff",
               textTransform: "uppercase",
               letterSpacing: "2px",
-              marginBottom: "12px",
+              marginBottom: "10px",
             }}
           >
             [SYS:MODELS]
           </span>
           <h2
             style={{
-              fontSize: "26px",
+              fontSize: "24px",
               fontWeight: 300,
               lineHeight: 1.2,
             }}
@@ -1797,161 +1710,32 @@ function MobileTechSection() {
         </motion.div>
       </div>
 
-      {/* Categories with horizontal scroll */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-        {categories.map((category, catIndex) => {
-          const techs = getTechsByCategory(category.prefix);
-          return (
-            <motion.div
-              key={category.id}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-30px" }}
-              transition={{ duration: 0.4, delay: catIndex * 0.05 }}
-            >
-              {/* Category header */}
-              <div
-                style={{
-                  padding: "0 20px",
-                  marginBottom: "12px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                }}
-              >
-                <div
-                  style={{
-                    width: "8px",
-                    height: "8px",
-                    backgroundColor: category.color,
-                    opacity: 0.8,
-                  }}
-                />
-                <span
-                  style={{
-                    fontFamily: "monospace",
-                    fontSize: "11px",
-                    color: "#888",
-                    letterSpacing: "1px",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {category.name}
-                </span>
-              </div>
-
-              {/* Horizontal scroll container */}
-              <div
-                style={{
-                  overflowX: "auto",
-                  overflowY: "hidden",
-                  WebkitOverflowScrolling: "touch",
-                  scrollbarWidth: "none",
-                  msOverflowStyle: "none",
-                  paddingLeft: "20px",
-                  paddingRight: "20px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "8px",
-                    paddingBottom: "4px",
-                  }}
-                >
-                  {techs.map((tech, techIndex) => (
-                    <motion.div
-                      key={tech.code}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: techIndex * 0.03 }}
-                      whileTap={{ scale: 0.95 }}
-                      style={{
-                        flexShrink: 0,
-                        padding: "12px 16px",
-                        backgroundColor: "#0a0a0a",
-                        border: "1px solid #1a1a1a",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "4px",
-                        minWidth: "100px",
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontFamily: "monospace",
-                          fontSize: "9px",
-                          color: category.color,
-                          opacity: 0.7,
-                        }}
-                      >
-                        {tech.code}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "13px",
-                          fontWeight: 500,
-                          color: "#e5e5e5",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        {tech.label}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
+      {/* Full Width Grid */}
+      <div style={{ flex: 1 }}>
+        <div
+          ref={gridRef}
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${columns}, 1fr)`,
+            border: "1px solid #1a1a1a",
+            borderRight: "none",
+            borderBottom: "none",
+            backgroundColor: "#000",
+          }}
+        >
+          {cellIndices.map((dataIndex, cellIndex) => {
+            const item = techData[dataIndex];
+            return (
+              <TechGridCell
+                key={cellIndex}
+                item={item}
+                isRevealed={isInView}
+                revealDelay={revealDelays[cellIndex]}
+              />
+            );
+          })}
+        </div>
       </div>
-
-      {/* Bottom stats */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        style={{
-          margin: "32px 20px 0",
-          padding: "16px",
-          border: "1px solid #1a1a1a",
-          display: "flex",
-          justifyContent: "space-around",
-        }}
-      >
-        <div style={{ textAlign: "center" }}>
-          <span style={{ display: "block", fontFamily: "monospace", fontSize: "20px", color: ACCENT_BLUE, fontWeight: 500 }}>
-            80+
-          </span>
-          <span style={{ fontFamily: "monospace", fontSize: "9px", color: "#555", letterSpacing: "1px" }}>
-            TECNOLOGIAS
-          </span>
-        </div>
-        <div style={{ width: "1px", backgroundColor: "#1a1a1a" }} />
-        <div style={{ textAlign: "center" }}>
-          <span style={{ display: "block", fontFamily: "monospace", fontSize: "20px", color: "#fff", fontWeight: 500 }}>
-            8
-          </span>
-          <span style={{ fontFamily: "monospace", fontSize: "9px", color: "#555", letterSpacing: "1px" }}>
-            CATEGORIAS
-          </span>
-        </div>
-        <div style={{ width: "1px", backgroundColor: "#1a1a1a" }} />
-        <div style={{ textAlign: "center" }}>
-          <motion.span
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            style={{ display: "block", fontFamily: "monospace", fontSize: "20px", color: "#10b981", fontWeight: 500 }}
-          >
-            ●
-          </motion.span>
-          <span style={{ fontFamily: "monospace", fontSize: "9px", color: "#555", letterSpacing: "1px" }}>
-            ATUALIZADO
-          </span>
-        </div>
-      </motion.div>
     </section>
   );
 }
@@ -2241,37 +2025,32 @@ function MobileAboutSection() {
       </motion.span>
 
       {/* Title */}
-      <h2
-        style={{
-          fontSize: "28px",
-          fontWeight: 200,
-          lineHeight: 1.3,
-          marginBottom: "24px",
-        }}
-      >
-        <TriggeredRevealText active={revealed} delay={0}>
-          O que é a&nbsp;
-        </TriggeredRevealText>
-        <TriggeredRevealText active={revealed} delay={80}>
-          <span style={{ fontWeight: 600, color: "#fff" }}>
-            Human Code
-          </span>
-        </TriggeredRevealText>
-        <TriggeredRevealText active={revealed} delay={160}>
-          &nbsp;?
-        </TriggeredRevealText>
-      </h2>
+      <div style={{ marginBottom: "24px" }}>
+        <TextReveal
+          style={{
+            fontSize: "28px",
+            fontWeight: 200,
+            lineHeight: 1.3,
+            color: "#fff",
+          }}
+        >
+          O que é a Human Code ?
+        </TextReveal>
+      </div>
 
-      {/* Description */}
-      <motion.div
-        animate={{ opacity: revealed ? 1 : 0, y: revealed ? 0 : 15 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        style={{ marginBottom: "32px" }}
-      >
-        <p style={{ fontSize: "14px", lineHeight: 1.8, color: "#888", fontWeight: 300 }}>
-          A <span style={{ color: "#ccc", fontWeight: 400 }}>Human Code Technology</span> (HCT) é uma empresa especializada em <span style={{ color: "#ccc", fontWeight: 400 }}>automação corporativa</span> sob medida. Atuamos com organizações que buscam reestruturar seus processos com <span style={{ color: "#ccc", fontWeight: 400 }}>profundidade, inteligência</span> e foco em <span style={{ color: "#ccc", fontWeight: 400 }}>resultados reais</span>.
-        </p>
-      </motion.div>
+      {/* Description - Text Reveal on scroll */}
+      <div style={{ marginBottom: "32px" }}>
+        <TextReveal
+          style={{
+            fontSize: "16px",
+            lineHeight: 1.8,
+            color: "#ccc",
+            fontWeight: 300,
+          }}
+        >
+          A Human Code Technology (HCT) é uma empresa especializada em automação corporativa sob medida. Atuamos com organizações que buscam reestruturar seus processos com profundidade, inteligência e foco em resultados reais.
+        </TextReveal>
+      </div>
 
       {/* Info Grid */}
       <motion.div
